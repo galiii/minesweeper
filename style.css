@@ -16,22 +16,62 @@ body{
   }
 
 
-.flex-bord{
+  .layout-game{
     width:300px;
     height:406px;
-    background-color: #569cdc;
-    /*height: calc(90vh - 90px);
-    background-color: #569cdc;
-    */
+    /*display: flex;*/
+    flex-wrap: wrap;
+  }
+
+
+.flex-bord{  
+  background-color: #569cdc;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-around;
-  
-  /*align-items:center;*/
-  /*align-content: space-between*/;
   padding: 10px;
 }
+
+.game-header{
+    display: flex;
+    /*justify-content:space-between;*/
+    border-bottom: 2px solid #000000;
+    background-color: #c25be4;
+
+}
+
+.title-game{
+    color:#c1c1c2;
+}
+
+.round{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    /* border-radius: 200%; */
+    width: 64px;
+    /*height: -28px;*/
+}
+
+.yellow-bull{
+    border : 5px double #ffbd2d;
+    border-radius: 200%;
+    height: 10px;
+    background: #ffbd2d;
+}
+
+.red-bull{
+    border-radius: 200%;
+    background-color: #fe544d;
+}
+
+.grey-bull{
+    border-radius: 200%;
+    background-color: #717272;
+}
+
+
 .border-game{
     height:45px;
     background-color: aquamarine;
@@ -39,7 +79,19 @@ body{
 
 .button-bar{
     height:41px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-items: center;
     background-color: brown;
+}
+
+.button{
+    height: 24px;
+    width: 81px;
+    background-color: #4a4a4a;
+    font-weight: bold;
+    color: #c5c5c5;
 }
 .dashbourd-game{
     /*height:300px;*/
@@ -48,7 +100,7 @@ body{
 }
 
 .cell{
-    width: 30px;
+  width: 30px;
   height: 30px;
   border: 1px solid black;
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
