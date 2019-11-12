@@ -1,0 +1,96 @@
+      
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #434343;
+}
+
+
+.ui-pic {
+    position: absolute;
+    /*width: 100%;
+    height: 100%;*/
+    opacity: 0.5;
+  }
+
+
+.flex-bord{
+    width:300px;
+    height:406px;
+    background-color: #569cdc;
+    /*height: calc(90vh - 90px);
+    background-color: #569cdc;
+    */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  
+  /*align-items:center;*/
+  /*align-content: space-between*/;
+  padding: 10px;
+}
+.border-game{
+    height:45px;
+    background-color: aquamarine;
+}
+
+.button-bar{
+    height:41px;
+    background-color: brown;
+}
+.dashbourd-game{
+    /*height:300px;*/
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell{
+    width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
+}
+
+
+.box-unswitch{
+    background-color:wheat ;
+}
+
+
+
+.face{
+    color: #fdf652;
+}
+
+
+.box-switch{
+    border: 1px solid #434343 ;
+    background-color:#4a4a4a;
+}
+
+.one{
+    color:#569cdc;
+}
+
+.two{
+    color:#32e267;
+}
+
+.three{
+    color:#ca3b3a;
+}
+
+.four{
+    color:#c25be4;
+}
+.digital-num{
+    color:#c03737;
+}
+
+.bump{
+    background-color: #ca3b3a;
+}
+
