@@ -4,7 +4,7 @@
 }
 
 body{
-    background-color: #434343;
+    background-color: #c5c5c5;
 }
 
 
@@ -15,70 +15,79 @@ body{
     opacity: 0.5;
   }
 
-
+/*The layout*/
   .layout-game{
+   /* border-left: 10px solid blue; 
+    border-right: 10px solid blue;*/ 
     width:300px;
     height:406px;
     /*display: flex;*/
     flex-wrap: wrap;
   }
 
-
-.flex-bord{  
-  background-color: #569cdc;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 10px;
-}
-
-.game-header{
+/* The first child of .layout-game*/   
+  .game-header{
     display: flex;
-    /*justify-content:space-between;*/
-    border-bottom: 2px solid #000000;
-    background-color: #c25be4;
+    flex-wrap:wrap;
+    align-content:flex-start;
+    /*justify-content:flex-start;*/
+    border-bottom: 1px solid #000000;
+    background-color: #444546;
 
 }
 
-.title-game{
-    color:#c1c1c2;
-}
 
 .round{
+    width: 22%;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
     /* border-radius: 200%; */
-    width: 64px;
     /*height: -28px;*/
 }
 
+/* Selects all .bull's elements where the parent is a .round element*/
+.round > .bull {
+    border-style: solid;
+    border-width: 5px;
+    /*border : 5px double #ffbd2d;*/
+    border-radius: 100%;
+    
+    align-self: center;
+}
+
 .yellow-bull{
-    border : 5px double #ffbd2d;
-    border-radius: 200%;
-    height: 10px;
+    border-color:  #ffbd2d;
     background: #ffbd2d;
 }
 
 .red-bull{
-    border-radius: 200%;
-    background-color: #fe544d;
+    border-color:  #fe544d;
+    background: #fe544d;
 }
 
 .grey-bull{
-    border-radius: 200%;
-    background-color: #717272;
+    border-color:  #717272;
+    background: #717272;
 }
 
 
-.border-game{
-    height:45px;
-    background-color: aquamarine;
+  .title-game{
+    /* display: flex; */
+    flex: 2;
+    justify-content: center;
+    font: bold;
+    color:#c1c2c3;
+    text-indent: 40px;
+    /*text-align: center;*/
+    
+    /* width: 42%;*/
 }
 
-.button-bar{
-    height:41px;
+.level-bar{
+    border-left: 5px solid #4a4a4a;
+    border-right: 5px solid #4a4a4a;
+    height:36px;
     display: flex;
     flex-wrap: wrap;
     justify-content:space-around;
@@ -86,26 +95,103 @@ body{
     background-color: brown;
 }
 
+.score-time{
+    border-left: 11px solid #4a4a4a;
+    border-right: 15px solid #4a4a4a;
+    display: flex;
+    /* border-style: inset; */
+    /* height: 53px; */
+    /* padding: 25px; */
+    height: 50px;
+    /* width: 100%; */
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+
+.score-time > div {
+    background-color: black;
+    margin: 1px;
+    padding: 10px;    
+}
+
+/*
+.score{
+    border-style: inset;
+
+}
+*/
+
+.smile{
+
+}
+
+.timer, .score{
+    border-style: inset;
+    /* position: relative; */
+    display: inline-block;
+    width: 67px;
+    /* height: 50px; */
+    /* margin: 5px;*/
+}
+
+.digital-num{
+    font-size: 14px;
+    color:#c03737;
+}
+
+
+
 .button{
     height: 24px;
-    width: 81px;
+    width: 87px;
     background-color: #4a4a4a;
     font-weight: bold;
     color: #c5c5c5;
 }
-.dashbourd-game{
-    /*height:300px;*/
+
+.flex-bord{  
+    background-color: #32e267;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    /*padding: 10px;*/
+  }
+/*
+  .bar{
+    border: 10px solid bisque;  
+    background-color: #ca3b3a;  
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0px;
+    margin-bottom: 3px
+  }
+*/
+.dashbourd-game{
+    border-top: 5px solid;
+    border-left: 5px solid;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #c25be4;
 }
 
 .cell{
   width: 30px;
   height: 30px;
   border: 1px solid black;
+ 
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
 }
 
+
+.number{
+    text-align: center;
+}
 
 .box-unswitch{
     background-color:wheat ;
@@ -138,11 +224,13 @@ body{
 .four{
     color:#c25be4;
 }
-.digital-num{
-    color:#c03737;
-}
+
 
 .bump{
     background-color: #ca3b3a;
+}
+
+.main-color{
+    background-color: #4a4a4a;
 }
 
