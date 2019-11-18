@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Minesweeper</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css">
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/brands.css">
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/solid.css">
+   
 </head>
 <body>
     <div class="container">
@@ -15,31 +19,44 @@
     <div class="layout-game">
             <div class="game-header">
                     <div class="round">
-                        <div class="red-bull bull"></div>
-                        <div class="yellow-bull bull"></div>
-                        <div class="grey-bull bull"></div>
+                        <div class="bull red-bull "></div>
+                        <div class="bull yellow-bull "></div>
+                        <div class=" bull grey-bull"></div>
                     </div>
                <div class="title-game">Minesweeper</div> 
                
             </div>
             <div class="flex-bord">
-              
-            <div class="level-bar main-color">
+                <div class="information">
+                            <div class="level-bar main-color border-color">
                     <button class="button">Easy</button>
                     <button class="button">Hard</button>
                     <button class="button">Expert</button>
                 </div>        
-    <div class="score-time main-color">
-        <div class="score digital-num">005</div>
-        <div class="smile">2</div>
-        <div class="timer digital-num">035</div>
+    <div class="panel border-color">
+        <div class="score-timer placeholder digital-num">
+            <div class="points"></div>
+            <div class="digit ">888</div>
+        </div>
+        <div class="smile">
+                <span class="icon">
+                        <i class="fas fa-smile"></i>
+                      </span>
+          </span></div>
+        <div class="score-timer placeholder digital-num">
+            <div class="timer"></div>
+            <div class="digit">888</div>
+        </div>
+    </div>
+</div>
+    
+    <div class="dashbourd-game" id="game">
+        
     </div>
 
-    
-    <div class="dashbourd-game" id="game"></div>
-
-    
+    </div>
     </div>
     <script src="./index.js"></script>
+   
 </body>
 </html>

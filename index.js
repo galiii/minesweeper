@@ -2,7 +2,6 @@
 //let itemsDiv = [];
 
 function addElements(){
-//const divCon = document.querySelector('.dashbourd-game');
 const divCon = document.getElementById('game');
 for(let i=0;i<81;i++){
 var itemsDiv = document.createElement("div"); // create a new div element
