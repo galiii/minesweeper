@@ -33,8 +33,7 @@ body{
 
 }
 
-/* The 3 bolls 
-The first child of .game-header
+/* The 3 bolls The first child of .game-header
 */
 .round{
     width: 22%;
@@ -65,8 +64,8 @@ The first child of .game-header
     background: #717272;
 }
 
+/* the context minesweeper */
 .title-game{
-    /* display: flex; */
     flex: 2;
     justify-content: center;
     font: bold;
@@ -78,8 +77,7 @@ The first child of .game-header
 .flex-bord{  
     background-color: #4a4a4a;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: space-around;
   }
 
@@ -91,7 +89,8 @@ The first child of .game-header
 
 }
 
-/* Buttons bar of easy hard expert 
+/* 
+Buttons bar of easy hard expert 
 */
 .border-color{
     border-left-color: #4a4a4a;
@@ -99,12 +98,11 @@ The first child of .game-header
 }
 
 
-.level-bar{
+.level{
     display: flex;
     flex-wrap: wrap;
     justify-content:space-around;
     align-items: center;
-    background-color: brown;
     height:36px;
 }
 
@@ -119,10 +117,6 @@ The first child of .game-header
     font-weight: bold;
     color: #c5c5c5;
 }
-
-
-
-
 
 .panel{
     /* top | right | bottom | left */
@@ -172,12 +166,8 @@ background-color: #fdf652;;
     color:#c03737;
 }
 
-.unknow-cell{
-    /* top | right | bottom | left */
-    border-top: solid #5f5f5f; 
-    border-right: outset #3e3e3e; 
-    border-bottom:outset #3e3e3e;
-    border-left: solid #808080;
+.close{
+    border: 3px outset #808080;  /* top | right | bottom | left */
     width: 30px;
     height: 30px;
     background-color: #5f5f5f;
@@ -187,16 +177,20 @@ background-color: #fdf652;;
 
 .dashbourd-game{
      /* top | right | bottom | left */
+    border:2px inset ;
+    border-top-color: #4a4a4a;
+    /* 
     border-top: outset #303030;
     border-right: solid #646464; 
     border-bottom: solid #646464;
     border-left: outset #303030;
+    */
     display: flex;
     flex-wrap: wrap;
     margin: 10px;
 }
 
-.cell{
+.open{
   width: 30px;
   height: 30px;
   border: 1px double #303030;
