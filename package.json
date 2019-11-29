@@ -4,6 +4,7 @@
   "description": "Game to play",
   "main": "index.js",
   "scripts": {
+    "format": "prettier \"src/**/*.{html,js,css}\" --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,7 +17,9 @@
     "url": "https://github.com/galiii/minesweeper/issues"
   },
   "homepage": "https://github.com/galiii/minesweeper#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2"
   }

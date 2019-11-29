@@ -1,0 +1,253 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #c5c5c5;
+}
+
+.ui-pic {
+  position: absolute;
+  opacity: 0.5;
+}
+
+/**     The layout      **/
+.layout-game {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid red;
+  width: 300px;
+}
+
+/* The first child of .layout-game */
+.game-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  border-bottom: 1px solid #000000;
+  background-color: #444546;
+}
+
+/* The 3 bolls The first child of .game-header
+*/
+.round {
+  width: 22%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.bull {
+  border: 5px solid;
+  align-self: center;
+  border-radius: 100%;
+}
+
+.yellow-bull {
+  border-color: #ffbd2d;
+  background: #ffbd2d;
+}
+
+.red-bull {
+  border-color: #fe544d;
+  background: #fe544d;
+}
+
+.grey-bull {
+  border-color: #717272;
+  background: #717272;
+}
+
+/* the context minesweeper */
+.title-game {
+  flex: 2;
+  justify-content: center;
+  font: bold;
+  color: #c1c2c3;
+  text-indent: 40px;
+}
+
+.flex-bord {
+  background-color: #4a4a4a;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+}
+
+.information {
+  border-left: 10px solid #4a4a4a;
+  border-right: 10px solid #4a4a4a;
+  background: #4a4a4a;
+}
+
+/* 
+Buttons bar of easy hard expert 
+*/
+.border-color {
+  border-left-color: #4a4a4a;
+  border-right-color: #4a4a4a;
+}
+
+.level {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 36px;
+}
+
+.button {
+  /* top | right | bottom | left */
+  border-style: outset inset inset outset;
+  border-color: #646464 #303030 #303030 #646464;
+  height: 24px;
+  width: 87px;
+  background-color: #4a4a4a;
+  font-weight: bold;
+  color: #c5c5c5;
+}
+
+.panel {
+  /* top | right | bottom | left */
+  border-style: outset inset inset outset;
+  border-color: #303030 #646464 #646464 #303030;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel > div {
+  height: 40px;
+  margin: 1px;
+  padding: 10px;
+}
+
+.score-timer {
+  /* top | right | bottom | left */
+  border-style: outset inset inset outset;
+  border-color: #303030 #646464 #646464 #303030;
+  background-color: #000000;
+  width: 25%;
+}
+
+.smile {
+  /* top | right | bottom | left */
+  display: flex;
+  justify-content: center;
+  /* position: relative; */
+  border-style: outset inset inset outset;
+  border-color: #646464 #303030 #303030 #646464;
+  background-color: #32e267;
+  width: 15%;
+}
+
+.icon {
+  border: 2px solid black;
+  border-radius: 100%;
+  background-color: #fdf652;
+}
+
+.digital-num {
+  font-size: 14px;
+  color: #c03737;
+}
+
+.close {
+  border: 3px outset #808080; /* top | right | bottom | left */
+  width: 30px;
+  height: 30px;
+  background-color: #5f5f5f;
+}
+
+.dashbourd-game {
+  /* top | right | bottom | left */
+  border: 2px inset;
+  border-top-color: #4a4a4a;
+  /* 
+    border-top: outset #303030;
+    border-right: solid #646464; 
+    border-bottom: solid #646464;
+    border-left: outset #303030;
+    */
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.open {
+  width: 30px;
+  height: 30px;
+  border: 1px double #303030;
+  /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
+}
+
+.number {
+  font-size: 1.125em;
+  font-weight: bold;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Ubuntu, Arial, sans-serif;
+  text-align: center;
+}
+
+.box-unswitch {
+  background-color: wheat;
+}
+
+.face {
+  color: #fdf652;
+}
+
+.box-switch {
+  border: 1px solid #434343;
+  background-color: #4a4a4a;
+}
+
+.bump {
+  background-color: #ca3b3a;
+}
+
+.main-color {
+  background-color: #4a4a4a;
+}
+
+.placeholder {
+  /*width:20px;*/
+  height: 20px;
+  margin: 0 5px;
+  position: relative;
+  display: inline-block;
+}
+
+.digit {
+  background: #c00;
+  border-radius: 5px;
+  position: absolute;
+  opacity: 0.15;
+  transition: opacity 0.2s;
+  -webkit-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+}
+
+.one {
+  color: #569cdc;
+}
+
+.two {
+  color: #32e267;
+}
+
+.three {
+  color: #ca3b3a;
+}
+
+.four {
+  color: #c25be4;
+}
+
+
+.mine{
+    background-color: #c03737;
+}
