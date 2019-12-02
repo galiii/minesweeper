@@ -26,7 +26,7 @@ function initBoard(width, height) {
 }
 
 /** 
- * The purpose of this function is : to insert isMine = false
+ * The purpose of this function is : to reset isMine = false
  * for every cell in the board
  **/
 function clearBoard() {
