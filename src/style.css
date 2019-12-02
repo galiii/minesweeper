@@ -132,11 +132,16 @@ Buttons bar of easy hard expert
 }
 
 .smile {
-  /* top | right | bottom | left */
-  display: flex;
-  justify-content: center;
-  /* position: relative; */
   border-style: outset inset inset outset;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* top | right | bottom | left */
+
+  /* position: relative; */
+
   border-color: #646464 #303030 #303030 #646464;
   background-color: #32e267;
   width: 15%;
@@ -146,6 +151,11 @@ Buttons bar of easy hard expert
   border: 2px solid black;
   border-radius: 100%;
   background-color: #fdf652;
+}
+
+svg{
+  width: 100px;
+  flex:1;
 }
 
 .digital-num {
@@ -247,7 +257,6 @@ Buttons bar of easy hard expert
   color: #c25be4;
 }
 
-
-.mine{
-    background-color: #c03737;
+.mine {
+  background-color: #c03737;
 }
