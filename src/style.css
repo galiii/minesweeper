@@ -96,16 +96,22 @@ Buttons bar of easy hard expert
   height: 36px;
 }
 
-.button {
-  /* top | right | bottom | left */
-  border-style: outset inset inset outset;
-  border-color: #646464 #303030 #303030 #646464;
+.btn{
+/* top | right | bottom | left */
+border-style: outset inset inset outset;
+border-color: #646464 #303030 #303030 #646464;
+background-color: #4a4a4a;
+color: #c5c5c5;
+font-weight: bold;
+}
+
+.level-btn{
   height: 24px;
   width: 87px;
   background-color: #4a4a4a;
-  font-weight: bold;
-  color: #c5c5c5;
+  
 }
+
 
 .panel {
   /* top | right | bottom | left */
@@ -132,18 +138,14 @@ Buttons bar of easy hard expert
 }
 
 .smile {
-  border-style: outset inset inset outset;
-  
+  /*border-style: outset inset inset outset;
+  border-color: #646464 #303030 #303030 #646464;*/ 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* top | right | bottom | left */
-
   /* position: relative; */
-
-  border-color: #646464 #303030 #303030 #646464;
-  background-color: #32e267;
+  /*background-color: #32e267;*/
   width: 15%;
 }
 
@@ -172,8 +174,11 @@ svg{
 
 .dashbourd-game {
   /* top | right | bottom | left */
-  border: 2px inset;
-  border-top-color: #4a4a4a;
+ /* border: 2px inset;*/
+  border-top: solid #303030;
+  border-left: solid #303030;
+  border-bottom: inset #646464;
+  border-right: inset #646464;
   /* 
     border-top: outset #303030;
     border-right: solid #646464; 
