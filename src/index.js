@@ -1,4 +1,13 @@
+
+const smilyBtn = document.getElementById('smileBtn');
 let board; //
+
+smilyBtn.addEventListener('click', function () {
+    console.log("in the click event");
+    initBoard(9, 9);
+    populateMines(10);
+    render();
+});
 
 /*
 Two dimension - 
@@ -101,6 +110,18 @@ function render() {
     }
 }
 
+
+function resetGame() {
+    console.log("hello there")
+    initBoard(9, 9);
+    populateMines(10);
+    render();
+}
+
+
+
 initBoard(9, 9);
 populateMines(10);
 render();
+
+
