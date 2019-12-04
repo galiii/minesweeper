@@ -25,7 +25,7 @@ body {
   flex-wrap: wrap;
   align-content: flex-start;
   border-bottom: 1px solid #000000;
-  background-color: #444546;
+  background-color: #454647;
 }
 
 /* The 3 bolls The first child of .game-header
@@ -63,7 +63,7 @@ body {
   flex: 2;
   justify-content: center;
   font: bold;
-  color: #c1c2c3;
+  color: #b9baba;
   text-indent: 40px;
 }
 
@@ -77,15 +77,6 @@ body {
 .information {
   border-left: 10px solid #4a4a4a;
   border-right: 10px solid #4a4a4a;
-  background: #4a4a4a;
-}
-
-/* 
-Buttons bar of easy hard expert 
-*/
-.border-color {
-  border-left-color: #4a4a4a;
-  border-right-color: #4a4a4a;
 }
 
 .level {
@@ -96,22 +87,19 @@ Buttons bar of easy hard expert
   height: 36px;
 }
 
-.btn{
-/* top | right | bottom | left */
-border-style: outset inset inset outset;
-border-color: #646464 #303030 #303030 #646464;
-background-color: #4a4a4a;
-color: #c5c5c5;
-font-weight: bold;
+.btn {
+  /* top | right | bottom | left */
+  border-style: outset inset inset outset;
+  border-color: #646464 #303030 #303030 #646464;
+  background-color: #4a4a4a;
+  color: #c5c5c5;
+  font-weight: bold;
 }
 
-.level-btn{
+.level-btn {
   height: 24px;
   width: 87px;
-  background-color: #4a4a4a;
-  
 }
-
 
 .panel {
   /* top | right | bottom | left */
@@ -139,7 +127,7 @@ font-weight: bold;
 
 .smile {
   /*border-style: outset inset inset outset;
-  border-color: #646464 #303030 #303030 #646464;*/ 
+  border-color: #646464 #303030 #303030 #646464;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -155,9 +143,9 @@ font-weight: bold;
   background-color: #fdf652;
 }
 
-svg{
+svg {
   width: 100px;
-  flex:1;
+  flex: 1;
 }
 
 .digital-num {
@@ -166,7 +154,7 @@ svg{
 }
 
 .close {
-  border: 3px outset #808080; /* top | right | bottom | left */
+  border: 3px outset #808080;
   width: 30px;
   height: 30px;
   background-color: #5f5f5f;
@@ -174,17 +162,8 @@ svg{
 
 .dashbourd-game {
   /* top | right | bottom | left */
- /* border: 2px inset;*/
-  border-top: solid #303030;
-  border-left: solid #303030;
-  border-bottom: inset #646464;
-  border-right: inset #646464;
-  /* 
-    border-top: outset #303030;
-    border-right: solid #646464; 
-    border-bottom: solid #646464;
-    border-left: outset #303030;
-    */
+  border-style: solid inset inset solid;
+  border-color: #303030 #646464 #646464 #303030;
   display: flex;
   flex-wrap: wrap;
   margin: 10px;
@@ -211,11 +190,6 @@ svg{
 
 .face {
   color: #fdf652;
-}
-
-.box-switch {
-  border: 1px solid #434343;
-  background-color: #4a4a4a;
 }
 
 .bump {
@@ -265,5 +239,3 @@ svg{
 .mine {
   background-color: #c03737;
 }
-
-
