@@ -1,13 +1,12 @@
 const smilyBtn = document.getElementById("smileBtn");
 let board; //
 
-smilyBtn.addEventListener("click", function () {
+smilyBtn.addEventListener("click", function() {
   console.log("in the click event");
   initBoard(9, 9);
   populateMines(10);
   render();
 });
-
 
 /**
  * Two dimension -
@@ -15,8 +14,8 @@ smilyBtn.addEventListener("click", function () {
  *  board = [[{1},{2},{3}],
  *           [{4},{5},{6}],
  *           [{7},{8},{9}]]
- * @param {*} width
- * @param {*} height
+ * @param {number} width
+ * @param {number} height
  */
 function initBoard(width, height) {
   board = []; //reset the board for a new game
@@ -43,10 +42,10 @@ function initBoard(width, height) {
  * for every cell in the board
  **/
 function clearBoard() {
+  //every row (height)
   for (let i = 0; i < board.length; i++) {
-    //every row (height)
+    //every column (width)
     for (let j = 0; j < board[i].length; j++) {
-      //every column (width)
       board[i][j].isMine = false;
     }
   }
@@ -54,9 +53,8 @@ function clearBoard() {
 
 /**
  * The purpose of this function is to populate the Mines
- * @param {*} numMines
+ * @param {number} numMines
  */
-
 function populateMines(numMines) {
   clearBoard(); //Reset - isMine  the property of cell for a new game
   //The run time of this function is O(numMines)
@@ -79,8 +77,7 @@ function populateMines(numMines) {
  * @param {*} y
  */
 function cellClicked(x, y) {
-  console.log("hey there");
-  console.log(x, y);
+  console.log(`hey there line 83 ${x} ${y}`);
 }
 
 /**
@@ -96,6 +93,7 @@ function openCell(i, j) {
   let cell = document.createElement("div");
   cell.classList.add("open");
   board[i][j].isMine ? cell.classList.add("mine") : cell.classList.add("open");
+  cell.id = board[i][j]["id"];
   /*cell.addEventListener("click", function (event) {
     console.log(event.target.id);
     console.log(event);
@@ -105,14 +103,15 @@ function openCell(i, j) {
 
 /*
 Help function for styling 
-if Cell is Close we have 2 Qustion
+if Cell is Close we have 2 Question
 if it's Flag we have class of mine
-and if it's not only open
+and if it's not only opens
 */
 function closeCell(i, j) {
   let cell = document.createElement("div");
   cell.classList.add("close");
   board[i][j].Flag ? cell.classList.add("flag") : cell.classList.add("close");
+  cell.id = board[i][j]["id"];
   return cell;
 }
 
@@ -122,26 +121,23 @@ function render() {
 
   for (let i = 0; i < board.length; i++) {
     let row = document.createElement("div");
+    row.classList.add("row");
     for (let j = 0; j < board[0].length; j++) {
       let cell = document.createElement("div");
       cell.id = board[i][j]["id"];
-      /*let ID = document.getElementById(cell.id);
-      ID.addEventListener('click', function () {
+      cell = !board[i][j]["isOpen"] ? closeCell(i, j) : openCell(i, j);
+      const IdElem = document.getElementById(cell["id"]);
+
+      cell.addEventListener("click", function() {
         cellClicked(i, j);
-      });*/
-      cell = !board[i][j].isOpen ? closeCell(i, j) : openCell(i, j);
-      //console.log(cell);
+        if (!board[i][j].isOpen) {
+          cell.classList.replace("close", "open");
+        }
+      });
       row.appendChild(cell); //
     }
     boardElement.appendChild(row); //
   }
-}
-
-function resetGame() {
-  console.log("hello there");
-  initBoard(9, 9);
-  populateMines(10);
-  render();
 }
 
 initBoard(9, 9);

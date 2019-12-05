@@ -93,12 +93,12 @@ body {
   border-color: #646464 #303030 #303030 #646464;
   background-color: #4a4a4a;
   color: #c5c5c5;
-  font-weight: bold;
 }
 
 .level-btn {
   height: 24px;
   width: 87px;
+  font-weight: bold;
 }
 
 .panel {
@@ -134,7 +134,7 @@ body {
   align-items: center;
   /* position: relative; */
   /*background-color: #32e267;*/
-  width: 15%;
+  width: 10%;
 }
 
 .icon {
@@ -153,13 +153,6 @@ svg {
   color: #c03737;
 }
 
-.close {
-  border: 3px outset #808080;
-  width: 30px;
-  height: 30px;
-  background-color: #5f5f5f;
-}
-
 .dashbourd-game {
   /* top | right | bottom | left */
   border-style: solid inset inset solid;
@@ -170,9 +163,12 @@ svg {
 }
 
 .open {
+  border: solid #303030;
+  border-bottom: none;
+  border-right: none;
+  background-color: #4a4a4a;
   width: 30px;
   height: 30px;
-  border: 1px double #303030;
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
 }
 
@@ -184,16 +180,8 @@ svg {
   text-align: center;
 }
 
-.box-unswitch {
-  background-color: wheat;
-}
-
 .face {
   color: #fdf652;
-}
-
-.bump {
-  background-color: #ca3b3a;
 }
 
 .main-color {
@@ -220,8 +208,13 @@ svg {
   -o-transition: opacity 0.2s;
 }
 
+.row {
+  display: flex;
+}
+
 .one {
   color: #569cdc;
+  background-color: #32e267;
 }
 
 .two {
@@ -238,4 +231,14 @@ svg {
 
 .mine {
   background-color: #c03737;
+}
+.bump {
+  background-color: #ca3b3a;
+}
+
+.close {
+  border: 3px outset #808080;
+  width: 30px;
+  height: 30px;
+  background-color: #5f5f5f;
 }
