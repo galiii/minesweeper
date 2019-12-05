@@ -20,7 +20,5 @@
   "devDependencies": {
     "prettier": "^1.19.1"
   },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2"
-  }
+  "dependencies": {}
 }

@@ -1,77 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Minesweeper</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../node_modules/@fortawesome/fontawesome-free/css/brands.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../node_modules/@fortawesome/fontawesome-free/css/solid.css"
-    />
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="ui-pic">
-        <img src="../img/ClassicMinesweeper.png" alt="" />
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-      <div class="layout-game">
-        <div class="game-header">
-          <div class="round">
-            <div class="bull red-bull "></div>
-            <div class="bull yellow-bull "></div>
-            <div class="bull grey-bull"></div>
-          </div>
-          <div class="title-game">Minesweeper</div>
+<body>
+  <div class="container">
+    <!--For UI Check-->
+    <!--div class="ui-pic">
+      <img src="../img/ClassicMinesweeper.png" alt="" />
+    </div-->
+
+    <div class="layout-game">
+      <div class="game-header">
+        <div class="round">
+          <div class="bull red-bull "></div>
+          <div class="bull yellow-bull "></div>
+          <div class="bull grey-bull"></div>
         </div>
-        <div class="flex-bord">
-          <div class="information">
-            <div class="level main-color border-color">
-              <button class="btn level-btn">Easy</button>
-              <button class="btn level-btn">Hard</button>
-              <button class="btn level-btn">Expert</button>
+        <div class="title-game">Minesweeper</div>
+      </div>
+      <div class="flex-bord">
+        <div class="information">
+          <div class="level main-color border-color">
+            <button class="btn level-btn active">Easy</button>
+            <button class="btn level-btn">Hard</button>
+            <button class="btn level-btn">Expert</button>
+          </div>
+          <!-- Level easy hard expert -->
+          <div class="border panel border-color">
+            <div class="score-timer placeholder digital-num">
+              <div class="points"></div>
+              <div class="digit ">888</div>
             </div>
-            <!-- Level easy hard expert -->
-            <div class="panel border-color">
-              <div class="score-timer placeholder digital-num">
-                <div class="points"></div>
-                <div class="digit ">888</div>
-              </div>
-              <!--Score-->
-              <div class="smile">
-                <button class="btn" id="smileBtn">Click me</button>
-                <!--svg viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+            <!--Score-->
+            <div class="smile">
+              <button class="btn" id="smileBtn">Click me</button>
+              <!--svg viewbox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="0" y="0" width="100%" height="100%" />
                                 <circle cx="50%" cy="50%" r="4" fill="white" />
                             </svg-->
-              </div>
-              <!--SMILE-->
-              <div class="score-timer placeholder digital-num">
-                <div class="timer"></div>
-                <div class="digit">888</div>
-              </div>
             </div>
-            <!--Timer-->
+            <!--SMILE-->
+            <div class="score-timer placeholder digital-num">
+              <div class="timer"></div>
+              <div class="digit">888</div>
+            </div>
           </div>
-          <!---Panel Timer Smile Score-->
-          <div class="dashbourd-game" id="game"></div>
+          <!--Timer-->
         </div>
-        <!--Flex Board-->
+        <!---Panel Timer Smile Score-->
+        <div class="dashbourd-game" id="game"></div>
       </div>
-      <!--Layout-->
+      <!--Flex Board-->
     </div>
-    <!--Container-->
-    <script src="./index.js"></script>
-  </body>
+    <!--Layout-->
+  </div>
+  <!--Container-->
+  <script src="./index.js"></script>
+</body>
+
 </html>
