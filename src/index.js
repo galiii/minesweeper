@@ -5,7 +5,7 @@ let board; //
  * 
  */
 smilyBtn.addEventListener("click", function () {
-  console.log("in the click event");
+  //console.log("in the click event");
   initBoard(9, 9);
   populateMines(10);
   render();
@@ -67,9 +67,9 @@ function populateMines(numMines) {
     let y = Math.floor(Math.random() * board.length); //Random num of rows
     let x = Math.floor(Math.random() * board[0].length); //Random num of columns
     //If in the cell of board[x][y].isMine === false
-    if (!board[x][y].isMine) {
-      board[x][y].isMine = true; //set it to be true
-      board[x][y].isOpen = true;
+    if (!board[y][x].isMine) {
+      board[y][x].isMine = true; //set it to be true
+      board[y][x].isOpen = true;
       numMines--; //decrease the number of mines we have left to assigned
     }
   }
@@ -96,8 +96,10 @@ function cellClicked(x, y) {
 function openCell(i, j) {
   let cell = document.createElement("div");
   cell.classList.add("open");
-  board[i][j].isMine ? cell.classList.add("mine") : cell.classList.add("open");
-  cell.id = board[i][j]["id"];
+  board[i][j].isMine ?
+    cell.classList.add("mine") :
+    cell.classList.add("open");
+  cell.id = board[i][j].id;
   return cell;
 }
 
@@ -110,11 +112,16 @@ and if it's not only opens
 function closeCell(i, j) {
   let cell = document.createElement("div");
   cell.classList.add("close");
-  board[i][j].Flag ? cell.classList.add("flag") : cell.classList.add("close");
-  cell.id = board[i][j]["id"];
+  board[i][j].Flag ?
+    cell.classList.add("flag") :
+    cell.classList.add("close");
+  cell.id = board[i][j].id;
   return cell;
 }
 
+/**
+ * 
+ */
 function render() {
   const boardElement = document.getElementById("game"); //
   boardElement.innerHTML = "";
@@ -123,19 +130,24 @@ function render() {
     row.classList.add("row"); //<div class="row">
     for (let j = 0; j < board[0].length; j++) {
       let cell = document.createElement("div");
-      cell.id = board[i][j]["id"];
-      cell = !board[i][j]["isOpen"] ? closeCell(i, j) : openCell(i, j);
+      cell.id = board[i][j].id;
+      cell = !board[i][j].isOpen ?
+        closeCell(i, j) :
+        openCell(i, j);
       /*
       Should find a better solution
       */
-      cell.addEventListener("click", function () {
-        cellClicked(i, j);
+      cell.addEventListener("click", function (event) {
+        //console.log("the event", event);
+        //console.log("this object", this);
+
         if (!board[i][j].isOpen) {
           cell.classList.replace("close", "open");
         }
       });
       row.appendChild(cell);//
     }
+
     boardElement.appendChild(row); //
   }
 }

@@ -223,7 +223,7 @@ svg {
 
 
 .row {
-  display: flex;/*A MUST PROPERTY*/
+  /*display: flex; MUST PROPERTY*/
 }
 
 .one {
