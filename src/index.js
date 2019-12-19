@@ -1,5 +1,6 @@
 const smilyBtn = document.getElementById("smileBtn");
 let board; //
+let mines;
 
 /**
  * 
@@ -27,12 +28,13 @@ function initBoard(width, height) {
     for (let j = 0; j < width; j++) {
       //cell is an object that return have the next proprties
       let cell = {
-        y: i,
-        x: j,
-        id: i + "" + j,
+        i: i,
+        j: j,
+        id: i + " " + j,
         isOpen: false, //Boolean value that tell me if the user open the cell (by Click event)
         isMine: false, //Boolean value that tell me if there is a Mine
-        isFlag: false //Boolean value that tell me if the User put a flag in this cell
+        isFlag: false, //Boolean value that tell me if the User put a flag in this cell
+        neighbors: 0
       };
       row.push(cell); //have the cell object (item) to the row in other words row[i][j] = cell
     }
@@ -47,10 +49,11 @@ function initBoard(width, height) {
  **/
 function clearBoard() {
   //every row (height)
-  for (let i = 0; i < board.length; i++) {
+  for (let row = 0; row < board.length; row++) {
     //every column (width)
-    for (let j = 0; j < board[i].length; j++) {
-      board[i][j].isMine = false;
+    for (let col = 0; col < board[row].length; col++) {
+      board[row][col].isMine = false;
+      board[row][col].neighbors = 0;
     }
   }
 }
@@ -60,29 +63,68 @@ function clearBoard() {
  * @param {number} numMines - witch will be on the board
  */
 function populateMines(numMines) {
+  mines = [];
   clearBoard(); //Reset - isMine  the property of cell for a new game
   //The run time of this function is O(numMines)
   while (numMines > 0) {
     //while there are still mines that we didn't populate
-    let y = Math.floor(Math.random() * board.length); //Random num of rows
-    let x = Math.floor(Math.random() * board[0].length); //Random num of columns
+    let row = Math.floor(Math.random() * board.length); //Random num of rows
+    let col = Math.floor(Math.random() * board[0].length); //Random num of columns
     //If in the cell of board[x][y].isMine === false
-    if (!board[y][x].isMine) {
-      board[y][x].isMine = true; //set it to be true
-      board[y][x].isOpen = true;
+    if (!board[row][col].isMine) {
+      board[row][col].isMine = true; //set it to be true
+      board[row][col].isOpen = true;
       numMines--; //decrease the number of mines we have left to assigned
+      //mines.push({ y: y, x: x });
+      calculateNeighbors(row, col);
     }
   }
+
 }
 
-/**
- *
- * @param {number} x
- * @param {number} y
- */
-function cellClicked(x, y) {
-  console.log(`hey there line 83 ${x} ${y}`);
+function calculateNeighbors(row, col) {
+
+  console.log(`in calculateNeighbors(${row},${col})`);
+  if (row - 1 >= 0) {
+    if (col - 1 >= 0) {
+      board[row - 1][col - 1].neighbors++;
+      console.log(`(${row - 1}, ${col - 1}) The Number of neighbore ${board[row - 1][col - 1].neighbors}`);
+    }
+    if (col + 1 < board[0].length) {
+      board[row - 1][col + 1].neighbors++;
+      console.log(`(${row - 1}, ${col + 1}) The Number of neighbore ${board[row - 1][col + 1].neighbors}`);
+    }
+    board[row - 1][col].neighbors++;
+    console.log(`(${row - 1}, ${col}) The Number of neighbore ${board[row - 1][col].neighbors}`);
+  }
+
+  if (row + 1 < board.length) {
+    if (col - 1 >= 0) {
+      board[row + 1][col - 1].neighbors++;
+      console.log(`(${row + 1}, ${col - 1}) The Number of neighbore ${board[row + 1][col - 1].neighbors}`);
+    }
+    if (col + 1 < board[0].length) {
+      board[row + 1][col + 1].neighbors++;
+      console.log(`${row + 1} ${col + 1} The Number of neighbore ${board[row + 1][col + 1].neighbors}`);
+    }
+    board[row + 1][col].neighbors++;
+    console.log(`(${row + 1}, ${col}) The Number of neighbore ${board[row + 1][col].neighbors}`);
+  }
+
+  if (col + 1 < board[0].length) {
+    board[row][col + 1].neighbors++;
+    console.log(`(${row}, ${col + 1}) The Number of neighbore ${board[row][col + 1].neighbors}`);
+  }
+
+  if (col - 1 >= 0) {
+    board[row][col - 1].neighbors++;
+    console.log(`(${row}, ${col - 1}) The Number of neighbore ${board[row][col - 1].neighbors}`);
+  }
+
+
 }
+
+
 
 /**
  * Help function for styling
@@ -93,13 +135,13 @@ function cellClicked(x, y) {
  * @param {nunber} j index of the column
  * @returns an Object Cell / <div>
  */
-function openCell(i, j) {
+function openCell(row, col) {
   let cell = document.createElement("div");
   cell.classList.add("open");
-  board[i][j].isMine ?
+  board[row][col].isMine ?
     cell.classList.add("mine") :
     cell.classList.add("open");
-  cell.id = board[i][j].id;
+  cell.id = board[row][col].id;
   return cell;
 }
 
@@ -109,13 +151,13 @@ if Cell is Close we have 2 Question
 if it's Flag we have class of mine
 and if it's not only opens
 */
-function closeCell(i, j) {
+function closeCell(row, col) {
   let cell = document.createElement("div");
   cell.classList.add("close");
-  board[i][j].Flag ?
+  board[row][col].Flag ?
     cell.classList.add("flag") :
     cell.classList.add("close");
-  cell.id = board[i][j].id;
+  cell.id = board[row][col].id;
   return cell;
 }
 
@@ -125,30 +167,31 @@ function closeCell(i, j) {
 function render() {
   const boardElement = document.getElementById("game"); //
   boardElement.innerHTML = "";
-  for (let i = 0; i < board.length; i++) {
-    let row = document.createElement("div");
-    row.classList.add("row"); //<div class="row">
-    for (let j = 0; j < board[0].length; j++) {
+  for (let row = 0; row < board.length; row++) {
+    let rowDiv = document.createElement("div");
+    rowDiv.classList.add("row"); //<div class="row">
+    for (let col = 0; col < board[0].length; col++) {
       let cell = document.createElement("div");
-      cell.id = board[i][j].id;
-      cell = !board[i][j].isOpen ?
-        closeCell(i, j) :
-        openCell(i, j);
+      cell.id = board[row][col].id;
+      cell = !board[row][col].isOpen ?
+        closeCell(row, col) :
+        openCell(row, col);
+
+
       /*
       Should find a better solution
       */
       cell.addEventListener("click", function (event) {
-        //console.log("the event", event);
-        //console.log("this object", this);
-
-        if (!board[i][j].isOpen) {
+        if (!board[row][col].isOpen) {
+          console.log(cell);
           cell.classList.replace("close", "open");
+          cell.innerHTML = board[row][col].neighbors;
         }
       });
-      row.appendChild(cell);//
+      rowDiv.appendChild(cell);//
     }
 
-    boardElement.appendChild(row); //
+    boardElement.appendChild(rowDiv); //
   }
 }
 
