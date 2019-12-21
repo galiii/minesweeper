@@ -42,7 +42,8 @@ later when the user clicks the cell
 Now there can be some clicking : 
 situations when it is mined or when a number then needs to do a neighbors calculation
 
-  אז יכול להיות כמה אופציות לשכנים 8 5 או 3
+So there may be some options for neighbors 8 5 or 3
+
 
 8 Neighbors
 | `row`\ `col` | `-1`    | `0`    | `+1`  |
@@ -70,19 +71,18 @@ situations when it is mined or when a number then needs to do a neighbors calcul
 function calculateNeighbors(row, col) {
   console.log(`in calculateNeighbors(${row},${col})`);
   for (let i = -1; i <= 1; i++) {
-    for (let j = 0; j <= 1; j++) {
-      if (row + i >= 0 || row + i < board.length) {
-        if (col + j <= 0 || col + j < board[0].length) {
-          board[row + i][col + j].neighbors++;
-          console.log(
-            `(${row + i}, ${col + j}) The Number of neighbore ${
-              board[row + i][col + j].neighbors
-            }`
-          );
+    if (row + i >= 0 && row + i < board.length) {
+      for (let j = -1; j <= 1; j++) {
+        if (col + j >= 0 && col + j < board[0].length) {
+          if (board[row + i][col + j].isMine) {
+            console.log(board[row + i][col + j]);
+          } else {
+            console.log(`calculate  ${row + i} ${col + j}`);
+            board[row + i][col + j].neighbors++;
+          }
         }
       }
     }
   }
 }
-
 ```

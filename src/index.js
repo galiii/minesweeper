@@ -5,7 +5,7 @@ let mines;
 /**
  *
  */
-smilyBtn.addEventListener("click", function() {
+smilyBtn.addEventListener("click", function () {
   //console.log("in the click event");
   initBoard(9, 9);
   populateMines(10);
@@ -73,9 +73,8 @@ function populateMines(numMines) {
     //If in the cell of board[x][y].isMine === false
     if (!board[row][col].isMine) {
       board[row][col].isMine = true; //set it to be true
-      numMines--; //decrease the number of mines we have left to assigned
-      //mines.push({ y: y, x: x });
       calculateNeighbors(row, col);
+      numMines--; //decrease the number of mines we have left to assigned
     }
   }
 }
@@ -83,15 +82,15 @@ function populateMines(numMines) {
 function calculateNeighbors(row, col) {
   console.log(`in calculateNeighbors(${row},${col})`);
   for (let i = -1; i <= 1; i++) {
-    for (let j = 0; j <= 1; j++) {
-      if (row + i >= 0 || row + i < board.length) {
-        if (col + j <= 0 || col + j < board[0].length) {
-          board[row + i][col + j].neighbors++;
-          console.log(
-            `(${row + i}, ${col + j}) The Number of neighbore ${
-              board[row + i][col + j].neighbors
-            }`
-          );
+    if (row + i >= 0 && row + i < board.length) {
+      for (let j = -1; j <= 1; j++) {
+        if (col + j >= 0 && col + j < board[0].length) {
+          if (board[row + i][col + j].isMine) {
+            console.log("Mine not calculate", board[row + i][col + j]);
+          } else {
+            console.log(`calculate  ${row + i} ${col + j}`);
+            board[row + i][col + j].neighbors++;
+          }
         }
       }
     }
@@ -109,8 +108,6 @@ function calculateNeighbors(row, col) {
  */
 function openCell(row, col, cell) {
   console.log(`openCell(${row}, ${col})`);
-  //let cell = document.createElement("div");
-  //cell.classList.replace("close", "open");
   if (board[row][col].isMine) {
     cell.classList.replace("close", "mine-open");
   } else {
@@ -128,7 +125,7 @@ if it's Flag we have class of mine
 and if it's not only opens
 */
 function closeCell(row, col) {
-  console.log(`closeCell(${row}, ${col})`);
+  //console.log(`closeCell(${row}, ${col})`);
   let cell = document.createElement("div");
   cell.classList.add("close");
   board[row][col].Flag
@@ -150,14 +147,12 @@ function render() {
     for (let col = 0; col < board[0].length; col++) {
       let cell = document.createElement("div");
       cell.id = board[row][col].id;
-      cell = closeCell(row, col); // !board[row][col].isOpen ?
-      //closeCell(row, col) :
-      //openCell(row, col, cell);
+      cell = closeCell(row, col);
 
       /*
       Should find a better solution
       */
-      cell.addEventListener("click", function(event) {
+      cell.addEventListener("click", function (event) {
         if (!board[row][col].isOpen) {
           console.log(cell);
           cell = openCell(row, col, cell);
