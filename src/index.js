@@ -3,9 +3,9 @@ let board; //
 let mines;
 
 /**
- * 
+ *
  */
-smilyBtn.addEventListener("click", function () {
+smilyBtn.addEventListener("click", function() {
   //console.log("in the click event");
   initBoard(9, 9);
   populateMines(10);
@@ -43,7 +43,7 @@ function initBoard(width, height) {
 }
 
 /**
- * The purpose of this function is : 
+ * The purpose of this function is :
  * to reset isMine = false
  * for every cell in the board
  **/
@@ -73,58 +73,30 @@ function populateMines(numMines) {
     //If in the cell of board[x][y].isMine === false
     if (!board[row][col].isMine) {
       board[row][col].isMine = true; //set it to be true
-      board[row][col].isOpen = true;
       numMines--; //decrease the number of mines we have left to assigned
       //mines.push({ y: y, x: x });
       calculateNeighbors(row, col);
     }
   }
-
 }
 
 function calculateNeighbors(row, col) {
-
   console.log(`in calculateNeighbors(${row},${col})`);
-  if (row - 1 >= 0) {
-    if (col - 1 >= 0) {
-      board[row - 1][col - 1].neighbors++;
-      console.log(`(${row - 1}, ${col - 1}) The Number of neighbore ${board[row - 1][col - 1].neighbors}`);
+  for (let i = -1; i <= 1; i++) {
+    for (let j = 0; j <= 1; j++) {
+      if (row + i >= 0 || row + i < board.length) {
+        if (col + j <= 0 || col + j < board[0].length) {
+          board[row + i][col + j].neighbors++;
+          console.log(
+            `(${row + i}, ${col + j}) The Number of neighbore ${
+              board[row + i][col + j].neighbors
+            }`
+          );
+        }
+      }
     }
-    if (col + 1 < board[0].length) {
-      board[row - 1][col + 1].neighbors++;
-      console.log(`(${row - 1}, ${col + 1}) The Number of neighbore ${board[row - 1][col + 1].neighbors}`);
-    }
-    board[row - 1][col].neighbors++;
-    console.log(`(${row - 1}, ${col}) The Number of neighbore ${board[row - 1][col].neighbors}`);
   }
-
-  if (row + 1 < board.length) {
-    if (col - 1 >= 0) {
-      board[row + 1][col - 1].neighbors++;
-      console.log(`(${row + 1}, ${col - 1}) The Number of neighbore ${board[row + 1][col - 1].neighbors}`);
-    }
-    if (col + 1 < board[0].length) {
-      board[row + 1][col + 1].neighbors++;
-      console.log(`${row + 1} ${col + 1} The Number of neighbore ${board[row + 1][col + 1].neighbors}`);
-    }
-    board[row + 1][col].neighbors++;
-    console.log(`(${row + 1}, ${col}) The Number of neighbore ${board[row + 1][col].neighbors}`);
-  }
-
-  if (col + 1 < board[0].length) {
-    board[row][col + 1].neighbors++;
-    console.log(`(${row}, ${col + 1}) The Number of neighbore ${board[row][col + 1].neighbors}`);
-  }
-
-  if (col - 1 >= 0) {
-    board[row][col - 1].neighbors++;
-    console.log(`(${row}, ${col - 1}) The Number of neighbore ${board[row][col - 1].neighbors}`);
-  }
-
-
 }
-
-
 
 /**
  * Help function for styling
@@ -135,13 +107,17 @@ function calculateNeighbors(row, col) {
  * @param {nunber} j index of the column
  * @returns an Object Cell / <div>
  */
-function openCell(row, col) {
-  let cell = document.createElement("div");
-  cell.classList.add("open");
-  board[row][col].isMine ?
-    cell.classList.add("mine") :
-    cell.classList.add("open");
+function openCell(row, col, cell) {
+  console.log(`openCell(${row}, ${col})`);
+  //let cell = document.createElement("div");
+  //cell.classList.replace("close", "open");
+  if (board[row][col].isMine) {
+    cell.classList.replace("close", "mine-open");
+  } else {
+    cell.classList.replace("close", "open");
+  }
   cell.id = board[row][col].id;
+  //cell.innerHTML = row + "  " + col;
   return cell;
 }
 
@@ -152,17 +128,18 @@ if it's Flag we have class of mine
 and if it's not only opens
 */
 function closeCell(row, col) {
+  console.log(`closeCell(${row}, ${col})`);
   let cell = document.createElement("div");
   cell.classList.add("close");
-  board[row][col].Flag ?
-    cell.classList.add("flag") :
-    cell.classList.add("close");
+  board[row][col].Flag
+    ? cell.classList.add("flag")
+    : cell.classList.add("close");
   cell.id = board[row][col].id;
   return cell;
 }
 
 /**
- * 
+ *
  */
 function render() {
   const boardElement = document.getElementById("game"); //
@@ -173,22 +150,22 @@ function render() {
     for (let col = 0; col < board[0].length; col++) {
       let cell = document.createElement("div");
       cell.id = board[row][col].id;
-      cell = !board[row][col].isOpen ?
-        closeCell(row, col) :
-        openCell(row, col);
-
+      cell = closeCell(row, col); // !board[row][col].isOpen ?
+      //closeCell(row, col) :
+      //openCell(row, col, cell);
 
       /*
       Should find a better solution
       */
-      cell.addEventListener("click", function (event) {
+      cell.addEventListener("click", function(event) {
         if (!board[row][col].isOpen) {
           console.log(cell);
-          cell.classList.replace("close", "open");
+          cell = openCell(row, col, cell);
+          //cell.classList.replace("close", "open");
           cell.innerHTML = board[row][col].neighbors;
         }
       });
-      rowDiv.appendChild(cell);//
+      rowDiv.appendChild(cell); //
     }
 
     boardElement.appendChild(rowDiv); //

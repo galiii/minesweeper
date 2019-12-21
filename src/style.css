@@ -79,13 +79,11 @@ body {
   border-right: 10px solid #4a4a4a;
 }
 
-.border{
+.border {
   /* top | right | bottom | left */
   border-style: outset inset inset outset;
   border-color: #303030 #646464 #646464 #303030;
-  
 }
-
 
 .level {
   display: flex;
@@ -110,14 +108,13 @@ body {
 }
 
 /* Style the active class, and buttons on mouse-over */
-.active, .btn:hover {
-  border:inset outset outset inset;
-  border-color:#303030 #646464  #646464 #303030 ;
-  
+.active,
+.btn:hover {
+  border: inset outset outset inset;
+  border-color: #303030 #646464 #646464 #303030;
 }
 
 .panel {
-
   display: flex;
   height: 50px;
   justify-content: space-between;
@@ -131,7 +128,6 @@ body {
 }
 
 .score-timer {
-  
   border-style: outset inset inset outset;
   border-color: #303030 #646464 #646464 #303030;
   background-color: #000000;
@@ -185,6 +181,16 @@ svg {
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
 }
 
+.mine-open {
+  border: solid #303030;
+  border-bottom: none;
+  border-right: none;
+  background-color: #c93b3a;
+  width: 30px;
+  height: 30px;
+  /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
+}
+
 .number {
   font-size: 1.125em;
   font-weight: bold;
@@ -221,14 +227,12 @@ svg {
   -o-transition: opacity 0.2s;
 }
 
-
 .row {
   /*display: flex; MUST PROPERTY*/
 }
 
 .one {
   color: #569cdc;
-  
 }
 
 .two {
