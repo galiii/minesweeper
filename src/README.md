@@ -60,6 +60,7 @@ So there may be some options for neighbors 8 5 or 3
 
 
 5 Neighbors
+
 | `row`\ `col`   |  `-1`    | `0`     | `+1`   |
 | ---    | ---   |          |         |        |      
 | `0`    |       | `0-1`    | `Mine00`| `-1+1` |
