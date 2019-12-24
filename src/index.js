@@ -1,10 +1,6 @@
 const smilyBtn = document.getElementById("smileBtn");
 let board; //
-let mines;
 
-/**
- *
- */
 smilyBtn.addEventListener("click", function () {
   //console.log("in the click event");
   initBoard(9, 9);
@@ -28,9 +24,6 @@ function initBoard(width, height) {
     for (let j = 0; j < width; j++) {
       //cell is an object that return have the next proprties
       let cell = {
-        i: i,
-        j: j,
-        id: i + " " + j,
         isOpen: false, //Boolean value that tell me if the user open the cell (by Click event)
         isMine: false, //Boolean value that tell me if there is a Mine
         isFlag: false, //Boolean value that tell me if the User put a flag in this cell
@@ -49,11 +42,11 @@ function initBoard(width, height) {
  **/
 function clearBoard() {
   //every row (height)
-  for (let row = 0; row < board.length; row++) {
+  for (let x = 0; x < board.length; x++) {
     //every column (width)
-    for (let col = 0; col < board[row].length; col++) {
-      board[row][col].isMine = false;
-      board[row][col].neighbors = 0;
+    for (let y = 0; y < board[0].length; y++) {
+      board[x][y].isMine = false;
+      board[x][y].neighbors = 0;
     }
   }
 }
@@ -63,33 +56,28 @@ function clearBoard() {
  * @param {number} numMines - witch will be on the board
  */
 function populateMines(numMines) {
-  mines = [];
   clearBoard(); //Reset - isMine  the property of cell for a new game
   //The run time of this function is O(numMines)
   while (numMines > 0) {
     //while there are still mines that we didn't populate
-    let row = Math.floor(Math.random() * board.length); //Random num of rows
-    let col = Math.floor(Math.random() * board[0].length); //Random num of columns
+    let y = Math.floor(Math.random() * board.length); //Random num of rows
+    let x = Math.floor(Math.random() * board[0].length); //Random num of columns
     //If in the cell of board[x][y].isMine === false
-    if (!board[row][col].isMine) {
-      board[row][col].isMine = true; //set it to be true
-      calculateNeighbors(row, col);
+    if (!board[y][x].isMine) {
+      board[y][x].isMine = true; //set it to be true
+      calculateNeighbors(y, x);
       numMines--; //decrease the number of mines we have left to assigned
     }
   }
 }
 
-function calculateNeighbors(row, col) {
-  console.log(`in calculateNeighbors(${row},${col})`);
+function calculateNeighbors(x, y) {
   for (let i = -1; i <= 1; i++) {
-    if (row + i >= 0 && row + i < board.length) {
+    if (x + i >= 0 && x + i < board.length) {
       for (let j = -1; j <= 1; j++) {
-        if (col + j >= 0 && col + j < board[0].length) {
-          if (board[row + i][col + j].isMine) {
-            console.log("Mine not calculate", board[row + i][col + j]);
-          } else {
-            console.log(`calculate  ${row + i} ${col + j}`);
-            board[row + i][col + j].neighbors++;
+        if (y + j >= 0 && y + j < board[0].length) {
+          if (!board[x + i][y + j].isMine) {
+            board[x + i][y + j].neighbors++;
           }
         }
       }
@@ -97,74 +85,65 @@ function calculateNeighbors(row, col) {
   }
 }
 
-/**
- * Help function for styling
- * if Cell is open we have 2 Qustion
- * if it's Mine we have class of mine
- * and if it's not only open
- * @param {number} i index of the row
- * @param {nunber} j index of the column
- * @returns an Object Cell / <div>
- */
-function openCell(row, col, cell) {
-  console.log(`openCell(${row}, ${col})`);
-  if (board[row][col].isMine) {
-    cell.classList.replace("close", "mine-open");
-  } else {
-    cell.classList.replace("close", "open");
+
+function gameOver() {
+  board.forEach(function (col) {
+    col.forEach(function (cell) {
+      cell.isOpen = true;
+    })
+  });
+}
+
+function cellClicked(x, y) {
+  board[x][y].isOpen = true;
+  if (board[x][y].isMine) {
+    gameOver();
+    render();
+    return;
   }
-  cell.id = board[row][col].id;
-  //cell.innerHTML = row + "  " + col;
-  return cell;
+  if (board[x][y].neighbors > 0) {
+    render();
+    return;
+  }
+
+  cellClicked(x - 1, y - 1);
+  cellClicked(x - 1, y + 1);
+
+
+
+}
+function getCellClicked(x, y) {
+  return function () {
+    cellClicked(x, y);
+  }
 }
 
-/*
-Help function for styling 
-if Cell is Close we have 2 Question
-if it's Flag we have class of mine
-and if it's not only opens
-*/
-function closeCell(row, col) {
-  //console.log(`closeCell(${row}, ${col})`);
-  let cell = document.createElement("div");
-  cell.classList.add("close");
-  board[row][col].Flag
-    ? cell.classList.add("flag")
-    : cell.classList.add("close");
-  cell.id = board[row][col].id;
-  return cell;
-}
-
-/**
- *
- */
 function render() {
-  const boardElement = document.getElementById("game"); //
+  const boardElement = document.getElementById("game");
   boardElement.innerHTML = "";
-  for (let row = 0; row < board.length; row++) {
-    let rowDiv = document.createElement("div");
-    rowDiv.classList.add("row"); //<div class="row">
-    for (let col = 0; col < board[0].length; col++) {
-      let cell = document.createElement("div");
-      cell.id = board[row][col].id;
-      cell = closeCell(row, col);
 
-      /*
-      Should find a better solution
-      */
-      cell.addEventListener("click", function (event) {
-        if (!board[row][col].isOpen) {
-          console.log(cell);
-          cell = openCell(row, col, cell);
-          //cell.classList.replace("close", "open");
-          cell.innerHTML = board[row][col].neighbors;
+  board.forEach((col, x) => {
+    let colDiv = document.createElement('div');
+    col.forEach((cell, y) => {
+      let cellDiv = document.createElement('div');
+      if (!cell.isOpen) {
+        cellDiv.classList.add('close');
+      } else {
+        if (cell.isMine) {
+          cellDiv.classList.add('mine-open')
+        } else {
+          cellDiv.classList.add('open');
         }
-      });
-      rowDiv.appendChild(cell); //
-    }
+      }
 
-    boardElement.appendChild(rowDiv); //
-  }
+      if (cell.isOpen && cell.neighbors > 0 && !cell.isMine) {
+        cellDiv.innerHTML = cell.neighbors;
+      }
+      cellDiv.addEventListener('click', getCellClicked(x, y))
+      colDiv.appendChild(cellDiv);
+    })
+    boardElement.appendChild(colDiv);
+  });
 }
 
 initBoard(9, 9);
