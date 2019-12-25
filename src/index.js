@@ -2,7 +2,6 @@ const smilyBtn = document.getElementById("smileBtn");
 let board; //
 
 smilyBtn.addEventListener("click", function () {
-  //console.log("in the click event");
   initBoard(9, 9);
   populateMines(10);
   render();
@@ -94,7 +93,8 @@ function gameOver() {
   });
 }
 
-function cellClicked(x, y) {
+const cellClicked = (x, y) => {
+  //console.log(`x= ${x}  y= ${y}`);
   board[x][y].isOpen = true;
   if (board[x][y].isMine) {
     gameOver();
@@ -106,15 +106,37 @@ function cellClicked(x, y) {
     return;
   }
 
-  cellClicked(x - 1, y - 1);
-  cellClicked(x - 1, y + 1);
+  for (let i = -1; i <= 1; i++) {
+    if (x + i >= 0 && x + i < board.length) {
+      for (let j = -1; j <= 1; j++) {
+        if (y + j >= 0 && y + j < board[0].length) {
+          if (!board[x + i][y + j].isOpen) {
+            cellClicked(x + i, y + j);
+          }
+
+        }
+      }
+    }
+  }
+  return;
+}
 
 
+const memoize = (fn) => {
+  const cache = {};
+  return (...args) => {
+    const key = JSON.stringify(args);
+    return key in cache ? cache[key] : (cache[key] = fn(...args));
+  }
 
 }
+
 function getCellClicked(x, y) {
   return function () {
-    cellClicked(x, y);
+    const clickedRec = memoize(cellClicked);
+    //console.log(`y= ${y}`);
+    clickedRec(x, y);
+
   }
 }
 
@@ -141,7 +163,7 @@ function render() {
       }
       cellDiv.addEventListener('click', getCellClicked(x, y))
       colDiv.appendChild(cellDiv);
-    })
+    });
     boardElement.appendChild(colDiv);
   });
 }
