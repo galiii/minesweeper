@@ -51,16 +51,16 @@ So there may be some options for neighbors 8 5 or 3
 
 | row\col   | 0      | +1     |
 | ---------:| :----- |:-----: |
-| 0         | Mine00 | 0+1   
-| +1        |   +1-1 | +1+1   |  
+| **0**         | Mine00 | 0+1   
+| **+1**        |   +1-1 | +1+1   |  
 
 
 5 Neighbors
 
 | row\col   | -1     | 0      | +1     |
 | ---------:| :----- |:-----: |:-----: |
-| 0         |    0-1 | Mine00 | 0-1    |
-| +1        |   +1-1 | +10    | +1+1   | 
+| **0**         |    0-1 | Mine00 | 0-1    |
+| **+1**        |   +1-1 | +10    | +1+1   | 
 
 
 8 Neighbors
@@ -91,3 +91,4 @@ function calculateNeighbors(row, col) {
   }
 }
 ```
+## Example how it's work

@@ -70,13 +70,13 @@ function populateMines(numMines) {
   }
 }
 
-function calculateNeighbors(x, y) {
+function calculateNeighbors(y, x) {
   for (let i = -1; i <= 1; i++) {
-    if (x + i >= 0 && x + i < board.length) {
+    if (y + i >= 0 && y + i < board.length) {
       for (let j = -1; j <= 1; j++) {
-        if (y + j >= 0 && y + j < board[0].length) {
-          if (!board[x + i][y + j].isMine) {
-            board[x + i][y + j].neighbors++;
+        if (x + j >= 0 && x + j < board[0].length) {
+          if (!board[y + i][x + j].isMine) {
+            board[y + i][x + j].neighbors++;
           }
         }
       }
@@ -143,6 +143,8 @@ function render() {
     let colDiv = document.createElement("div");
     col.forEach((cell, y) => {
       let cellDiv = document.createElement("div");
+      cell.isOpen = true;
+
       if (!cell.isOpen) {
         cellDiv.classList.add("close");
       } else {
