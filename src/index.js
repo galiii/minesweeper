@@ -22,7 +22,10 @@ function initBoard(width, height) {
     let row = []; //reset for the next row
     for (let j = 0; j < width; j++) {
       //cell is an object that return have the next proprties
-      let cell = {
+      const cell = {
+        x: j,
+        y: i,
+        id: j + "" + i,
         isOpen: false, //Boolean value that tell me if the user open the cell (by Click event)
         isMine: false, //Boolean value that tell me if there is a Mine
         isFlag: false, //Boolean value that tell me if the User put a flag in this cell
@@ -72,11 +75,11 @@ function populateMines(numMines) {
 
 function calculateNeighbors(x, y) {
   for (let i = -1; i <= 1; i++) {
-    if (x + i >= 0 && x + i < board.length) {
+    if (y + i >= 0 && y + i < board.length) {
       for (let j = -1; j <= 1; j++) {
-        if (y + j >= 0 && y + j < board[0].length) {
-          if (!board[x + i][y + j].isMine) {
-            board[x + i][y + j].neighbors++;
+        if (x + j >= 0 && x + j < board[0].length) {
+          if (!board[y + i][x + j].isMine) {
+            board[y + i][x + j].neighbors++;
           }
         }
       }
@@ -94,31 +97,35 @@ function gameOver() {
 }
 
 const cellClicked = (x, y) => {
-  //console.log(`x= ${x}  y= ${y}`);
-  board[x][y].isOpen = true;
+
   if (board[x][y].isMine) {
     gameOver();
     render();
     return;
   }
-  if (board[x][y].neighbors > 0) {
+  if (board[x][y].neighbors > 0 && !board[x][y].isOpen) {
+    board[x][y].isOpen = true;
     render();
     return;
   }
-
+  board[x][y].isOpen = true;
   for (let i = -1; i <= 1; i++) {
-    if (x + i >= 0 && x + i < board.length) {
+    let xi = x + i;
+    if (xi >= 0 && xi < board.length) {
       for (let j = -1; j <= 1; j++) {
-        if (y + j >= 0 && y + j < board[0].length) {
-          if (!board[x + i][y + j].isOpen) {
-            cellClicked(x + i, y + j);
+        let yj = y + j;
+        if (yj >= 0 && yj < board[0].length) {
+          if (!board[xi][yj].isOpen) {
+            //board[x + i][y + j].isOpen = true;
+            //console.log(`${JSON.stringify(board[x + i][y + j])} x+i= ${x + i} y+j=${y + j}`);
+            cellClicked(xi, yj);
           }
 
         }
       }
     }
   }
-  return;
+  //return;
 }
 
 
@@ -126,16 +133,25 @@ const memoize = (fn) => {
   const cache = {};
   return (...args) => {
     const key = JSON.stringify(args);
-    return key in cache ? cache[key] : (cache[key] = fn(...args));
+    if (key in cache) {
+      console.log(cache[key]);
+      return cache[key];
+    }
+    else {
+      cache[key] = fn(...args);
+      return cache[key];
+    }
+
   }
 
 }
 
-function getCellClicked(x, y) {
+function getCellClicked(x, y, cell) {
   return function () {
-    const clickedRec = memoize(cellClicked);
-    //console.log(`y= ${y}`);
-    clickedRec(x, y);
+    //const clickedRec = memoize(cellClicked);
+    console.log(`x=${x} y= ${y} `);
+    console.log(cell);
+    cellClicked(x, y);
 
   }
 }
@@ -150,6 +166,8 @@ function render() {
       let cellDiv = document.createElement('div');
       if (!cell.isOpen) {
         cellDiv.classList.add('close');
+        //console.log(`x= ${x}  y=${y}`);
+        //console.log(cellDiv);
       } else {
         if (cell.isMine) {
           cellDiv.classList.add('mine-open')
@@ -161,7 +179,7 @@ function render() {
       if (cell.isOpen && cell.neighbors > 0 && !cell.isMine) {
         cellDiv.innerHTML = cell.neighbors;
       }
-      cellDiv.addEventListener('click', getCellClicked(x, y))
+      cellDiv.addEventListener('click', getCellClicked(x, y, this));
       colDiv.appendChild(cellDiv);
     });
     boardElement.appendChild(colDiv);
