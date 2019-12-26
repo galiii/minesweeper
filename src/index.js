@@ -84,12 +84,11 @@ function calculateNeighbors(x, y) {
   }
 }
 
-
 function gameOver() {
   board.forEach(function (col) {
     col.forEach(function (cell) {
       cell.isOpen = true;
-    })
+    });
   });
 }
 
@@ -113,31 +112,27 @@ const cellClicked = (x, y) => {
           if (!board[x + i][y + j].isOpen) {
             cellClicked(x + i, y + j);
           }
-
         }
       }
     }
   }
   return;
-}
+};
 
-
-const memoize = (fn) => {
+const memoize = fn => {
   const cache = {};
   return (...args) => {
     const key = JSON.stringify(args);
     return key in cache ? cache[key] : (cache[key] = fn(...args));
-  }
-
-}
+  };
+};
 
 function getCellClicked(x, y) {
   return function () {
-    const clickedRec = memoize(cellClicked);
+    //const clickedRec = memoize(cellClicked);
     //console.log(`y= ${y}`);
-    clickedRec(x, y);
-
-  }
+    cellClicked(x, y);
+  };
 }
 
 function render() {
@@ -145,23 +140,45 @@ function render() {
   boardElement.innerHTML = "";
 
   board.forEach((col, x) => {
-    let colDiv = document.createElement('div');
+    let colDiv = document.createElement("div");
     col.forEach((cell, y) => {
-      let cellDiv = document.createElement('div');
+      let cellDiv = document.createElement("div");
       if (!cell.isOpen) {
-        cellDiv.classList.add('close');
+        cellDiv.classList.add("close");
       } else {
         if (cell.isMine) {
-          cellDiv.classList.add('mine-open')
+          cellDiv.classList.add("mine-open");
         } else {
-          cellDiv.classList.add('open');
+          cellDiv.classList.add("open");
+          if (cell.neighbors > 0 && !cell.isMine) {
+            colors = [{ num: 1, color: "#569cdc" },
+            { num: 2, color: "#32e267" },
+            { num: 3, color: "#ca3b3a" },
+            { num: 4, color: "#c25be4" },
+            { num: 5, color: "#569cdc" }];
+
+            if (cell.neighbors == 1) {
+              cellDiv.style.color = "#569cdc";
+            }
+
+            else if (cell.neighbors == 2) {
+              cellDiv.style.color = "#32e267";
+            }
+
+            else if (cell.neighbors == 3) {
+              cellDiv.style.color = "#ca3b3a";
+            }
+
+            else if (cell.neighbors == 4) {
+              cellDiv.style.color = "#c25be4";
+            }
+            cellDiv.innerHTML = cell.neighbors;
+          }
         }
       }
 
-      if (cell.isOpen && cell.neighbors > 0 && !cell.isMine) {
-        cellDiv.innerHTML = cell.neighbors;
-      }
-      cellDiv.addEventListener('click', getCellClicked(x, y))
+
+      cellDiv.addEventListener("click", getCellClicked(x, y));
       colDiv.appendChild(cellDiv);
     });
     boardElement.appendChild(colDiv);
