@@ -230,7 +230,7 @@ svg {
 }
 
 .row {
-  /*display: flex;*/
+  display: flex;
 }
 
 .one {

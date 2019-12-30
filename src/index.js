@@ -22,7 +22,7 @@ function initBoard(width, height) {
     let row = []; //reset for the next row
     for (let j = 0; j < width; j++) {
       //cell is an object that return have the next proprties
-      let cell = {
+      const cell = {
         isOpen: false, //Boolean value that tell me if the user open the cell (by Click event)
         isMine: false, //Boolean value that tell me if there is a Mine
         isFlag: false, //Boolean value that tell me if the User put a flag in this cell
@@ -71,12 +71,14 @@ function populateMines(numMines) {
 }
 
 function calculateNeighbors(y, x) {
+  console.log(`calculateNeighbors(${y}, ${x})`);
   for (let i = -1; i <= 1; i++) {
     if (y + i >= 0 && y + i < board.length) {
       for (let j = -1; j <= 1; j++) {
         if (x + j >= 0 && x + j < board[0].length) {
           if (!board[y + i][x + j].isMine) {
             board[y + i][x + j].neighbors++;
+            console.log(`board[row ${i >= 0 ? "+  " + i : i} ][col ${j >= 0 ? "+  " + j : j}] => board[${y} ${i >= 0 ? "+  " + i : i}][${x} ${j >= 0 ? "+ " + j : j}] => board[${y + i}][${x + j}].neighbors++;`);
           }
         }
       }
@@ -141,6 +143,7 @@ function render() {
 
   board.forEach((col, x) => {
     let colDiv = document.createElement("div");
+    colDiv.classList.add('row');
     col.forEach((cell, y) => {
       let cellDiv = document.createElement("div");
       cell.isOpen = true;
@@ -153,32 +156,27 @@ function render() {
         } else {
           cellDiv.classList.add("open");
           if (cell.neighbors > 0 && !cell.isMine) {
-            colors = [{ num: 1, color: "#569cdc" },
-            { num: 2, color: "#32e267" },
-            { num: 3, color: "#ca3b3a" },
-            { num: 4, color: "#c25be4" },
-            { num: 5, color: "#569cdc" }];
+            colors = [
+              { num: 1, color: "#569cdc" },
+              { num: 2, color: "#32e267" },
+              { num: 3, color: "#ca3b3a" },
+              { num: 4, color: "#c25be4" },
+              { num: 5, color: "#569cdc" }
+            ];
 
             if (cell.neighbors == 1) {
               cellDiv.style.color = "#569cdc";
-            }
-
-            else if (cell.neighbors == 2) {
+            } else if (cell.neighbors == 2) {
               cellDiv.style.color = "#32e267";
-            }
-
-            else if (cell.neighbors == 3) {
+            } else if (cell.neighbors == 3) {
               cellDiv.style.color = "#ca3b3a";
-            }
-
-            else if (cell.neighbors == 4) {
+            } else if (cell.neighbors == 4) {
               cellDiv.style.color = "#c25be4";
             }
             cellDiv.innerHTML = cell.neighbors;
           }
         }
       }
-
 
       cellDiv.addEventListener("click", getCellClicked(x, y));
       colDiv.appendChild(cellDiv);
