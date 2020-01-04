@@ -90,4 +90,4 @@ function calculateNeighbors(row, col) {
 
 
 ## Example how it's work
-![Image of Yaktocat](../img/startBoard.png)
+![Image of Yaktocat](./img/startBoard.png)
