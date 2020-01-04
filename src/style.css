@@ -171,17 +171,6 @@ svg {
   margin: 10px;
 }
 
-.open {
-  border: solid #303030;
-  border-bottom: none;
-  border-right: none;
-  background-color: #4a4a4a;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  line-height: 1.8;
-  /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
-}
 
 .mine-open {
   border: solid #303030;
@@ -233,20 +222,10 @@ svg {
   display: flex;
 }
 
-.one {
-  color: #569cdc;
-}
 
-.two {
-  color: #32e267;
-}
-
-.three {
-  color: #ca3b3a;
-}
-
-.four {
-  color: #c25be4;
+.row > *{
+  width: 30px;
+  height: 30px;
 }
 
 .mine {
@@ -254,8 +233,41 @@ svg {
 }
 
 .close {
-  border: 3px outset #808080;
-  width: 30px;
-  height: 30px;
+  border: 3px outset #808080;  
   background-color: #5f5f5f;
 }
+
+.open {
+  border: solid #303030;
+  border-bottom: none;
+  border-right: none;
+  background-color: #4a4a4a;
+  text-align: center;
+  line-height: 1.8;
+  /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
+}
+
+
+span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:large;
+  
+  /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
+}
+
+.neighbors-1 {
+  color: #569cdc;
+}
+
+.neighbors-2 {
+  color: #32e267;
+}
+
+.neighbors-3 {
+  color: #ca3b3a;
+}
+
+.neighbors-4{
+  color: #c25be4;
+}
+

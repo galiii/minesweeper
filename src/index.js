@@ -136,10 +136,15 @@ function getCellClicked(row, col) {
   };
 }
 
+
+function init() {
+
+}
+
 function render() {
   const boardElement = document.getElementById("game");
   boardElement.innerHTML = "";
-
+  console.log(boardElement);
   board.forEach((row, ri) => {
     let rowDiv = document.createElement("div");
     rowDiv.classList.add("row");
@@ -155,7 +160,10 @@ function render() {
         } else {
           cellDiv.classList.add("open");
           if (cell.neighbors > 0 && !cell.isMine) {
-            cellDiv.innerHTML = cell.neighbors;
+            let neighborDiv = document.createElement("span");
+            neighborDiv.classList.add("neighbors" + "-" + cell.neighbors);
+            neighborDiv.innerHTML = cell.neighbors;
+            cellDiv.appendChild(neighborDiv);
           }
         }
       }
