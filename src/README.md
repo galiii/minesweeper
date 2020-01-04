@@ -74,17 +74,13 @@ So there may be some options for neighbors 8 5 or 3
 
 ```javascript
 function calculateNeighbors(row, col) {
-  console.log(`in calculateNeighbors(${row},${col})`);
   for (let i = -1; i <= 1; i++) {
     if (row + i >= 0 && row + i < board.length) {
       for (let j = -1; j <= 1; j++) {
         if (col + j >= 0 && col + j < board[0].length) {
-          if (board[row + i][col + j].isMine) {
-            console.log(board[row + i][col + j]);
-          } else {
-            console.log(`calculate  ${row + i} ${col + j}`);
+          if (!board[row + i][col + j].isMine) {
             board[row + i][col + j].neighbors++;
-          }
+          } 
         }
       }
     }
@@ -92,3 +88,4 @@ function calculateNeighbors(row, col) {
 }
 ```
 ## Example how it's work
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)

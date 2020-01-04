@@ -41,11 +41,12 @@ function initBoard(width, height) {
  **/
 function clearBoard() {
   //every row (height)
-  for (let x = 0; x < board.length; x++) {
+  for (let row = 0; row < board.length; row++) {
     //every column (width)
-    for (let y = 0; y < board[0].length; y++) {
-      board[x][y].isMine = false;
-      board[x][y].neighbors = 0;
+    for (let col = 0; col < board[0].length; col++) {
+      board[row][col].isMine = false;
+      board[row][col].neighbors = 0;
+      board[row][col].isOpen = false;
     }
   }
 }
@@ -59,32 +60,35 @@ function populateMines(numMines) {
   //The run time of this function is O(numMines)
   while (numMines > 0) {
     //while there are still mines that we didn't populate
-    let y = Math.floor(Math.random() * board.length); //Random num of rows
-    let x = Math.floor(Math.random() * board[0].length); //Random num of columns
-    //If in the cell of board[x][y].isMine === false
-    if (!board[y][x].isMine) {
-      board[y][x].isMine = true; //set it to be true
-      calculateNeighbors(y, x);
+    let row = Math.floor(Math.random() * board.length); //Random num of rows
+    let col = Math.floor(Math.random() * board[0].length); //Random num of columns
+    //If in the cell of board[row][col].isMine === false
+    if (!board[row][col].isMine) {
+      board[row][col].isMine = true; //set it to be true
+      calculateNeighbors(row, col);
       numMines--; //decrease the number of mines we have left to assigned
     }
   }
 }
 
-function calculateNeighbors(y, x) {
-  console.log(`calculateNeighbors(${y}, ${x})`);
-  for (let i = -1; i <= 1; i++) {
-    if (y + i >= 0 && y + i < board.length) {
-      for (let j = -1; j <= 1; j++) {
-        if (x + j >= 0 && x + j < board[0].length) {
-          if (!board[y + i][x + j].isMine) {
-            board[y + i][x + j].neighbors++;
-            console.log(`board[row ${i >= 0 ? "+  " + i : i} ][col ${j >= 0 ? "+  " + j : j}] => board[${y} ${i >= 0 ? "+  " + i : i}][${x} ${j >= 0 ? "+ " + j : j}] => board[${y + i}][${x + j}].neighbors++;`);
+function calculateNeighbors(row, col) {
+  //console.log(`calculateNeighbors(${row}, ${col})`);
+  for (let i = -1; i <= 1; i++) { //O(3) MAX
+    if (row + i >= 0 && row + i < board.length) { //O(1)
+      for (let j = -1; j <= 1; j++) { //O(3) MAX
+        if (col + j >= 0 && col + j < board[0].length) { //O(1)
+          if (!board[row + i][col + j].isMine) { //O(1)
+            board[row + i][col + j].neighbors++;
           }
         }
       }
     }
   }
 }
+
+
+
+
 
 function gameOver() {
   board.forEach(function (col) {
@@ -94,25 +98,28 @@ function gameOver() {
   });
 }
 
-const cellClicked = (x, y) => {
-  //console.log(`x= ${x}  y= ${y}`);
-  board[x][y].isOpen = true;
-  if (board[x][y].isMine) {
+const cellClicked = (row, col) => {
+  //console.log(`row= ${row}  col= ${col}`);
+  board[row][col].isOpen = true;
+  if (board[row][col].isMine) {
     gameOver();
     render();
     return;
   }
-  if (board[x][y].neighbors > 0) {
+  if (board[row][col].neighbors > 0) {
     render();
     return;
   }
 
   for (let i = -1; i <= 1; i++) {
-    if (x + i >= 0 && x + i < board.length) {
+    if (row + i >= 0 && row + i < board.length) {
       for (let j = -1; j <= 1; j++) {
-        if (y + j >= 0 && y + j < board[0].length) {
-          if (!board[x + i][y + j].isOpen) {
-            cellClicked(x + i, y + j);
+        if (col + j >= 0 && col + j < board[0].length) {
+          // console.log(`cellClicked(${row + i}, ${col + j})`);
+          if (!board[row + i][col + j].isOpen) {
+            board[row + i][col + j].isOpen = true;
+            console.log(`line 120 cellClicked(${row + i}, ${col + j})`);
+            cellClicked(row + i, col + j);
           }
         }
       }
@@ -121,19 +128,11 @@ const cellClicked = (x, y) => {
   return;
 };
 
-const memoize = fn => {
-  const cache = {};
-  return (...args) => {
-    const key = JSON.stringify(args);
-    return key in cache ? cache[key] : (cache[key] = fn(...args));
-  };
-};
 
-function getCellClicked(x, y) {
+
+function getCellClicked(row, col) {
   return function () {
-    //const clickedRec = memoize(cellClicked);
-    //console.log(`y= ${y}`);
-    cellClicked(x, y);
+    cellClicked(row, col);
   };
 }
 
@@ -141,12 +140,12 @@ function render() {
   const boardElement = document.getElementById("game");
   boardElement.innerHTML = "";
 
-  board.forEach((col, x) => {
-    let colDiv = document.createElement("div");
-    colDiv.classList.add('row');
-    col.forEach((cell, y) => {
+  board.forEach((row, ri) => {
+    let rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
+    row.forEach((cell, ci) => {
       let cellDiv = document.createElement("div");
-      cell.isOpen = true;
+      //cell.isOpen = true;
 
       if (!cell.isOpen) {
         cellDiv.classList.add("close");
@@ -156,32 +155,15 @@ function render() {
         } else {
           cellDiv.classList.add("open");
           if (cell.neighbors > 0 && !cell.isMine) {
-            colors = [
-              { num: 1, color: "#569cdc" },
-              { num: 2, color: "#32e267" },
-              { num: 3, color: "#ca3b3a" },
-              { num: 4, color: "#c25be4" },
-              { num: 5, color: "#569cdc" }
-            ];
-
-            if (cell.neighbors == 1) {
-              cellDiv.style.color = "#569cdc";
-            } else if (cell.neighbors == 2) {
-              cellDiv.style.color = "#32e267";
-            } else if (cell.neighbors == 3) {
-              cellDiv.style.color = "#ca3b3a";
-            } else if (cell.neighbors == 4) {
-              cellDiv.style.color = "#c25be4";
-            }
             cellDiv.innerHTML = cell.neighbors;
           }
         }
       }
 
-      cellDiv.addEventListener("click", getCellClicked(x, y));
-      colDiv.appendChild(cellDiv);
+      cellDiv.addEventListener("click", getCellClicked(ri, ci));
+      rowDiv.appendChild(cellDiv);
     });
-    boardElement.appendChild(colDiv);
+    boardElement.appendChild(rowDiv);
   });
 }
 
