@@ -1,7 +1,7 @@
 const smilyBtn = document.getElementById("smileBtn");
 let board; //
 
-smilyBtn.addEventListener("click", function () {
+smilyBtn.addEventListener("click", function() {
   initBoard(9, 9);
   populateMines(10);
   render();
@@ -73,11 +73,16 @@ function populateMines(numMines) {
 
 function calculateNeighbors(row, col) {
   //console.log(`calculateNeighbors(${row}, ${col})`);
-  for (let i = -1; i <= 1; i++) { //O(3) MAX
-    if (row + i >= 0 && row + i < board.length) { //O(1)
-      for (let j = -1; j <= 1; j++) { //O(3) MAX
-        if (col + j >= 0 && col + j < board[0].length) { //O(1)
-          if (!board[row + i][col + j].isMine) { //O(1)
+  for (let i = -1; i <= 1; i++) {
+    //O(3) MAX
+    if (row + i >= 0 && row + i < board.length) {
+      //O(1)
+      for (let j = -1; j <= 1; j++) {
+        //O(3) MAX
+        if (col + j >= 0 && col + j < board[0].length) {
+          //O(1)
+          if (!board[row + i][col + j].isMine) {
+            //O(1)
             board[row + i][col + j].neighbors++;
           }
         }
@@ -86,13 +91,9 @@ function calculateNeighbors(row, col) {
   }
 }
 
-
-
-
-
 function gameOver() {
-  board.forEach(function (col) {
-    col.forEach(function (cell) {
+  board.forEach(function(col) {
+    col.forEach(function(cell) {
       cell.isOpen = true;
     });
   });
@@ -128,18 +129,13 @@ const cellClicked = (row, col) => {
   return;
 };
 
-
-
 function getCellClicked(row, col) {
-  return function () {
+  return function() {
     cellClicked(row, col);
   };
 }
 
-
-function init() {
-
-}
+function init() {}
 
 function render() {
   const boardElement = document.getElementById("game");
@@ -150,7 +146,7 @@ function render() {
     rowDiv.classList.add("row");
     row.forEach((cell, ci) => {
       let cellDiv = document.createElement("div");
-      //cell.isOpen = true;
+      // cell.isOpen = true;
 
       if (!cell.isOpen) {
         cellDiv.classList.add("close");

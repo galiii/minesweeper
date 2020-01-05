@@ -15,16 +15,20 @@ body {
 .layout-game {
   display: flex;
   flex-direction: column;
-  border: 2px solid red;
+  flex-wrap: wrap;
+  /*border: 2px solid red;
+  border-radius: 25px;*/
   width: 300px;
 }
 
 /* The first child of .layout-game */
 .game-header {
   display: flex;
-  flex-wrap: wrap;
+  /*flex-wrap: wrap;*/
   align-content: flex-start;
   border-bottom: 1px solid #000000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-color: #454647;
 }
 
@@ -163,14 +167,12 @@ svg {
 }
 
 .dashbourd-game {
-  /* top | right | bottom | left */
-  border-style: solid inset inset solid;
-  border-color: #303030 #646464 #646464 #303030;
+  border-style: inset;
+  border-color: #646464;
   display: flex;
   flex-wrap: wrap;
-  margin: 10px;
+  margin: 12px;
 }
-
 
 .mine-open {
   border: solid #303030;
@@ -222,8 +224,7 @@ svg {
   display: flex;
 }
 
-
-.row > *{
+.row > * {
   width: 30px;
   height: 30px;
 }
@@ -233,7 +234,7 @@ svg {
 }
 
 .close {
-  border: 3px outset #808080;  
+  border: 3px outset #808080;
   background-color: #5f5f5f;
 }
 
@@ -247,11 +248,10 @@ svg {
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
 }
 
-
 span {
   font-family: Arial, Helvetica, sans-serif;
-  font-size:large;
-  
+  font-stretch: extra-expanded;
+  font-weight: bold;
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
 }
 
@@ -267,7 +267,6 @@ span {
   color: #ca3b3a;
 }
 
-.neighbors-4{
+.neighbors-4 {
   color: #c25be4;
 }
-
