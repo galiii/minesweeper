@@ -130,12 +130,19 @@ const cellClicked = (row, col) => {
 
 
 
-function getCellClicked(row, col) {
+function getCellClicked(cell, row, col) {
   return function () {
+    console.log(cell.event.target);
     cellClicked(row, col);
   };
 }
 
+function getCellFlag(event, row, col) {
+  return function () {
+    console.log(event);
+    console.log(row, col);
+  };
+}
 
 function init() {
 
@@ -144,14 +151,14 @@ function init() {
 function render() {
   const boardElement = document.getElementById("game");
   boardElement.innerHTML = "";
-  console.log(boardElement);
+  //console.log(boardElement);
+
   board.forEach((row, ri) => {
     let rowDiv = document.createElement("div");
     rowDiv.classList.add("row");
     row.forEach((cell, ci) => {
       let cellDiv = document.createElement("div");
       //cell.isOpen = true;
-
       if (!cell.isOpen) {
         cellDiv.classList.add("close");
       } else {
@@ -168,7 +175,16 @@ function render() {
         }
       }
 
-      cellDiv.addEventListener("click", getCellClicked(ri, ci));
+      cellDiv.addEventListener("click", getCellClicked(this, ri, ci));
+      cellDiv.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+        console.log(event);
+        const target = event.target;
+        console.log(target);
+        console.log(ri, ci);
+        cell
+      }); //right click - flag
+
       rowDiv.appendChild(cellDiv);
     });
     boardElement.appendChild(rowDiv);
