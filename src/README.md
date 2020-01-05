@@ -87,5 +87,19 @@ function calculateNeighbors(row, col) {
   }
 }
 ```
+
+
 ## Example how it's work
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Yaktocat](./img/startBoard.png)
+
+
+### we can have 3 5 or 8 neighbors
+
+#### Example to 3 neighbors
+![Image of 3 neighbors](./img/board3.png)
+
+#### Example to 5 neighbors
+![Image of 5 neighbors](./img/52n.png)
+
+#### Example to 8 neighbors
+![Image of 8 neighbors](./img/82n.png)
