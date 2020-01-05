@@ -92,7 +92,7 @@ function calculateNeighbors(row, col) {
 ## Example how it's work
 ![Image of Yaktocat](./img/startBoard.png)
 
-![Image of board](./img/board1.png)
+
 ### we can have 3 5 or 8 neighbors
 
 #### Example to 3 neighbors
