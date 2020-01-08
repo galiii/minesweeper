@@ -248,7 +248,7 @@ svg {
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
 }
 
-span {
+[class=open] {
   font-family: Arial, Helvetica, sans-serif;
   font-stretch: extra-expanded;
   font-weight: bold;

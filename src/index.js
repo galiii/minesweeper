@@ -99,7 +99,7 @@ function gameOver() {
 }
 
 const cellClicked = (row, col) => {
-  //console.log(`row= ${row}  col= ${col}`);
+  console.log(` cellClicked row= ${row}  col= ${col}`);
   board[row][col].isOpen = true;
   if (board[row][col].isMine) {
     gameOver();
@@ -116,10 +116,14 @@ const cellClicked = (row, col) => {
       for (let j = -1; j <= 1; j++) {
         if (col + j >= 0 && col + j < board[0].length) {
           // console.log(`cellClicked(${row + i}, ${col + j})`);
+          let prev = board[row + i][col + j].isOpen;
           if (!board[row + i][col + j].isOpen) {
+            console.log(`line prev=${prev} 120 board[${row} + ${i}][${col} + ${j}] cellClicked(${row + i}, ${col + j})`);
             board[row + i][col + j].isOpen = true;
-            console.log(`line 120 cellClicked(${row + i}, ${col + j})`);
             cellClicked(row + i, col + j);
+          } else {
+            console.log(`line 124  board[${row} + ${i}][${col} + ${j}] prev=${prev} , ${board[row + i][col + j].isOpen} cellClicked(${row + i}, ${col + j})`);
+
           }
         }
       }
@@ -182,7 +186,7 @@ function render() {
         const target = event.target;
         console.log(target);
         console.log(ri, ci);
-        cell
+
       }); //right click - flag
 
       rowDiv.appendChild(cellDiv);
