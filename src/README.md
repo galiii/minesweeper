@@ -1,105 +1,114 @@
-# Calculate Neighbors
-
-The first step is to calculate and allocate mines on the board
- The planing of the mines is exhausted
-
- ```javascript
-function populateMines(numMines) {
-  clearBoard();
-  //The run time of this function is O(numMines)
-  while (numMines > 0) {
-    let row = Math.floor(Math.random() * board.length); 
-    let col = Math.floor(Math.random() * board[0].length); 
-
-    if (!board[row][col].isMine) {
-      board[row][col].isMine = true; //set it to be true
-      numMines--;
-     
-      calculateNeighbors(row, col);
-    }
-  }
-}
- ```
- When you give this function as a number of mines parameter
-  ```javascript
-numMines
- ```
-
- Run until you finish assigning the required number of mines
- ```javascript
-  while (numMines > 0)
-  ```
-
-  If it is not mined by the object that I will immediately specify 
-  if the template object is not mined then you will assign it
-   ```javascript
-  if (!board[row][col].isMine) {
-      board[row][col].isMine = true; 
-  ```
-  
-We now have a neighbor calculation that will help us 
-later when the user clicks the cell
-Now there can be some clicking : 
-situations when it is mined or when a number then needs to do a neighbors calculation
-
-So there may be some options for neighbors 8 5 or 3
-
-
-
-
-3 Neighbors (`0-1` `-1-1` `-10`)
-
-| row\col   | 0      | +1     |
-| ---------:| :----- |:-----: |
-| **0**         | Mine00 | 0+1   
-| **+1**        |   +1-1 | +1+1   |  
-
-
-5 Neighbors
-
-| row\col   | -1     | 0      | +1     |
-| ---------:| :----- |:-----: |:-----: |
-| **0**         |    0-1 | Mine00 | 0-1    |
-| **+1**        |   +1-1 | +10    | +1+1   | 
-
-
-8 Neighbors
-
-| row\col   | -1     | 0      | +1     |
-| ---------:| :----- |:-----: |:-----: |
-| **-1**    |  -1-1  | -10    | -1+1   |
-| **0**     |  0-1   | Mine00 | 0+1    | 
-| **+1**    |  +1-1  | +10    | +1+1   | 
-
-
-```javascript
-function calculateNeighbors(row, col) {
-  for (let i = -1; i <= 1; i++) {
-    if (row + i >= 0 && row + i < board.length) {
-      for (let j = -1; j <= 1; j++) {
-        if (col + j >= 0 && col + j < board[0].length) {
-          if (!board[row + i][col + j].isMine) {
-            board[row + i][col + j].neighbors++;
-          } 
-        }
-      }
-    }
-  }
-}
+ 
+ 
+ ```html
+ <body>
+ <div class="layout-game">
 ```
+ 
+
+  ![Image of Header](../img/header.png)
+  ```html
+    <div class="game-header">
+      <div class="round">
+        <div class="bull red-bull "></div>
+        <div class="bull yellow-bull "></div>
+        <div class="bull grey-bull"></div>
+      </div>
+      <div class="title-game">Minesweeper</div>
+      <div class="round">
+        <div class="bull red-bull "></div>
+        <div class="bull yellow-bull "></div>
+        <div class="bull grey-bull"></div>
+      </div>
+    </div>
+    
+<style>
+/* The layout of the header */
+.game-header {
+  display: flex;
+  align-content: flex-start;
+  border-bottom: 1px solid #000000;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #454647;
+}
+
+/*
+ The layout 3 bolls direct child of .game-header
+*/
+.round {
+  width: 22%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.bull {
+  border: 5px solid;
+  align-self: center;
+  border-radius: 100%;
+}
+
+.yellow-bull {
+  border-color: #ffbd2d;
+  background: #ffbd2d;
+}
+
+.red-bull {
+  border-color: #fe544d;
+  background: #fe544d;
+}
+
+.grey-bull {
+  border-color: #717272;
+  background: #717272;
+}
+
+/* the title minesweeper direct (/second) child of .game-header  */
+.title-game {
+  flex: 2;
+  justify-content: center;
+  font: bold;
+  color: #b9baba;
+  text-indent: 40px;
+}
+</style>
+  ```
 
 
-## Example how it's work
-![Image of Yaktocat](../img/startBoard.png)
+    <div class="flex-bord">
+      <div class="information">
+        <div class="level main-color border-color">
+          <button class="btn level-btn active">Easy</button>
+          <button class="btn level-btn">Hard</button>
+          <button class="btn level-btn">Expert</button>
+        </div>
+        <!-- Level easy hard expert -->
+        <div class="border panel border-color">
+          <div class="score-timer placeholder digital-num">
+            <div class="points"></div>
+            <div class="digit ">888</div>
+          </div>
+          <!--Score-->
+          <div class="smile">
+            <button class="btn" id="smileBtn">Click me</button>
 
+          </div>
+          <!--SMILE-->
+          <div class="score-timer placeholder digital-num">
+            <div class="timer"></div>
+            <div class="digit">888</div>
+          </div>
+        </div>
+        <!--Timer-->
+      </div>
+      <!---Panel Timer Smile Score-->
+      <div class="dashbourd-game" id="game"></div>
+    </div>
+    <!--Flex Board-->
+  </div>
+  <!--Layout-->
 
-### we can have 3 5 or 8 neighbors
-
-#### Example to 3 neighbors
-![Image of 3 neighbors](../img/board3.png)
-
-#### Example to 5 neighbors
-![Image of 5 neighbors](../img/52n.png)
-
-#### Example to 8 neighbors
-![Image of 8 neighbors](../img/82n.png)
+  <script src="./index.js"></script>
+</body>
+  ```

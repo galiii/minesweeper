@@ -14,8 +14,7 @@ body {
 /**     The layout      **/
 .layout-game {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
   /*border: 2px solid red;
   border-radius: 25px;*/
   width: 300px;
@@ -24,7 +23,6 @@ body {
 /* The first child of .layout-game */
 .game-header {
   display: flex;
-  /*flex-wrap: wrap;*/
   align-content: flex-start;
   border-bottom: 1px solid #000000;
   border-top-left-radius: 10px;
@@ -32,7 +30,8 @@ body {
   background-color: #454647;
 }
 
-/* The 3 bolls The first child of .game-header
+/*
+ The layout 3 bolls direct child of .game-header
 */
 .round {
   width: 22%;
@@ -62,7 +61,7 @@ body {
   background: #717272;
 }
 
-/* the context minesweeper */
+/* the title minesweeper direct (/second) child of .game-header  */
 .title-game {
   flex: 2;
   justify-content: center;
@@ -72,10 +71,10 @@ body {
 }
 
 .flex-bord {
-  background-color: #4a4a4a;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
+  background-color:#4a4a4a;
 }
 
 .information {
@@ -248,7 +247,7 @@ svg {
   /*(box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;*/
 }
 
-[class=open] {
+[class="open"] {
   font-family: Arial, Helvetica, sans-serif;
   font-stretch: extra-expanded;
   font-weight: bold;

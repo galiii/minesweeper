@@ -1,7 +1,7 @@
 const smilyBtn = document.getElementById("smileBtn");
 let board; //
 
-smilyBtn.addEventListener("click", function () {
+smilyBtn.addEventListener("click", function() {
   initBoard(9, 9);
   populateMines(10);
   render();
@@ -73,11 +73,16 @@ function populateMines(numMines) {
 
 function calculateNeighbors(row, col) {
   //console.log(`calculateNeighbors(${row}, ${col})`);
-  for (let i = -1; i <= 1; i++) { //O(3) MAX
-    if (row + i >= 0 && row + i < board.length) { //O(1)
-      for (let j = -1; j <= 1; j++) { //O(3) MAX
-        if (col + j >= 0 && col + j < board[0].length) { //O(1)
-          if (!board[row + i][col + j].isMine) { //O(1)
+  for (let i = -1; i <= 1; i++) {
+    //O(3) MAX
+    if (row + i >= 0 && row + i < board.length) {
+      //O(1)
+      for (let j = -1; j <= 1; j++) {
+        //O(3) MAX
+        if (col + j >= 0 && col + j < board[0].length) {
+          //O(1)
+          if (!board[row + i][col + j].isMine) {
+            //O(1)
             board[row + i][col + j].neighbors++;
           }
         }
@@ -86,13 +91,9 @@ function calculateNeighbors(row, col) {
   }
 }
 
-
-
-
-
 function gameOver() {
-  board.forEach(function (col) {
-    col.forEach(function (cell) {
+  board.forEach(function(col) {
+    col.forEach(function(cell) {
       cell.isOpen = true;
     });
   });
@@ -118,12 +119,18 @@ const cellClicked = (row, col) => {
           // console.log(`cellClicked(${row + i}, ${col + j})`);
           let prev = board[row + i][col + j].isOpen;
           if (!board[row + i][col + j].isOpen) {
-            console.log(`line prev=${prev} 120 board[${row} + ${i}][${col} + ${j}] cellClicked(${row + i}, ${col + j})`);
+            console.log(
+              `line prev=${prev} 120 board[${row} + ${i}][${col} + ${j}] cellClicked(${row +
+                i}, ${col + j})`
+            );
             board[row + i][col + j].isOpen = true;
             cellClicked(row + i, col + j);
           } else {
-            console.log(`line 124  board[${row} + ${i}][${col} + ${j}] prev=${prev} , ${board[row + i][col + j].isOpen} cellClicked(${row + i}, ${col + j})`);
-
+            console.log(
+              `line 124  board[${row} + ${i}][${col} + ${j}] prev=${prev} , ${
+                board[row + i][col + j].isOpen
+              } cellClicked(${row + i}, ${col + j})`
+            );
           }
         }
       }
@@ -132,25 +139,21 @@ const cellClicked = (row, col) => {
   return;
 };
 
-
-
 function getCellClicked(cell, row, col) {
-  return function () {
+  return function() {
     console.log(cell.event.target);
     cellClicked(row, col);
   };
 }
 
 function getCellFlag(event, row, col) {
-  return function () {
+  return function() {
     console.log(event);
     console.log(row, col);
   };
 }
 
-function init() {
-
-}
+function init() {}
 
 function render() {
   const boardElement = document.getElementById("game");
@@ -180,13 +183,12 @@ function render() {
       }
 
       cellDiv.addEventListener("click", getCellClicked(this, ri, ci));
-      cellDiv.addEventListener("contextmenu", function (event) {
+      cellDiv.addEventListener("contextmenu", function(event) {
         event.preventDefault();
         console.log(event);
         const target = event.target;
         console.log(target);
         console.log(ri, ci);
-
       }); //right click - flag
 
       rowDiv.appendChild(cellDiv);
