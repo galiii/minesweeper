@@ -15,13 +15,11 @@ body {
 .layout-game {
   display: flex;
   flex-flow: column wrap;
-  /*border: 2px solid red;
-  border-radius: 25px;*/
   width: 300px;
 }
 
 /* The first child of .layout-game */
-.game-header {
+.header-game {
   display: flex;
   align-content: flex-start;
   border-bottom: 1px solid #000000;
@@ -70,22 +68,27 @@ body {
   text-indent: 40px;
 }
 
-.flex-bord {
+.board-game {
   display: flex;
   flex-flow: column wrap;
-  justify-content: space-around;
-  background-color:#4a4a4a;
+  /*justify-content: space-around;*/
+  background-color: #4a4a4a;
+  border: solid 1px #4a4a4a;
+  border-bottom-left-radius: 4%;
+  border-bottom-right-radius: 4%;
 }
 
 .information {
+  display: flex;
+  flex-flow: column wrap;
   border-left: 10px solid #4a4a4a;
   border-right: 10px solid #4a4a4a;
 }
 
 .border {
   /* top | right | bottom | left */
-  border-style: outset inset inset outset;
-  border-color: #303030 #646464 #646464 #303030;
+  border-style: inset;
+  border-color: #646464 ;
 }
 
 .level {
@@ -166,11 +169,15 @@ svg {
 }
 
 .dashbourd-game {
-  border-style: inset;
-  border-color: #646464;
+  /*border-style: inset; */
+  /* border-color: #646464; */
   display: flex;
   flex-wrap: wrap;
-  margin: 12px;
+  /* margin: 12px; */
+  padding: 10px;
+  border: solid 5px #4a4a4a;
+  border-bottom-left-radius: 4%;
+  border-bottom-right-radius: 4%;
 }
 
 .mine-open {
@@ -239,8 +246,8 @@ svg {
 
 .open {
   border: solid #303030;
-  border-bottom: none;
-  border-right: none;
+  border-bottom-width: thin;
+  border-right-width: thin;
   background-color: #4a4a4a;
   text-align: center;
   line-height: 1.8;

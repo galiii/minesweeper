@@ -1,7 +1,7 @@
 const smilyBtn = document.getElementById("smileBtn");
 let board; //
 
-smilyBtn.addEventListener("click", function() {
+smilyBtn.addEventListener("click", function () {
   initBoard(9, 9);
   populateMines(10);
   render();
@@ -92,8 +92,8 @@ function calculateNeighbors(row, col) {
 }
 
 function gameOver() {
-  board.forEach(function(col) {
-    col.forEach(function(cell) {
+  board.forEach(function (col) {
+    col.forEach(function (cell) {
       cell.isOpen = true;
     });
   });
@@ -121,14 +121,14 @@ const cellClicked = (row, col) => {
           if (!board[row + i][col + j].isOpen) {
             console.log(
               `line prev=${prev} 120 board[${row} + ${i}][${col} + ${j}] cellClicked(${row +
-                i}, ${col + j})`
+              i}, ${col + j})`
             );
             board[row + i][col + j].isOpen = true;
             cellClicked(row + i, col + j);
           } else {
             console.log(
               `line 124  board[${row} + ${i}][${col} + ${j}] prev=${prev} , ${
-                board[row + i][col + j].isOpen
+              board[row + i][col + j].isOpen
               } cellClicked(${row + i}, ${col + j})`
             );
           }
@@ -140,25 +140,29 @@ const cellClicked = (row, col) => {
 };
 
 function getCellClicked(cell, row, col) {
-  return function() {
+  return function () {
     console.log(cell.event.target);
     cellClicked(row, col);
   };
 }
 
 function getCellFlag(event, row, col) {
-  return function() {
+  return function () {
     console.log(event);
     console.log(row, col);
   };
 }
 
-function init() {}
+function init() { }
 
 function render() {
   const boardElement = document.getElementById("game");
   boardElement.innerHTML = "";
   //console.log(boardElement);
+  const innerElement = document.createElement("div");
+  innerElement.innerHTML = "";
+  innerElement.classList.add("border");
+
 
   board.forEach((row, ri) => {
     let rowDiv = document.createElement("div");
@@ -183,7 +187,7 @@ function render() {
       }
 
       cellDiv.addEventListener("click", getCellClicked(this, ri, ci));
-      cellDiv.addEventListener("contextmenu", function(event) {
+      cellDiv.addEventListener("contextmenu", function (event) {
         event.preventDefault();
         console.log(event);
         const target = event.target;
@@ -193,7 +197,8 @@ function render() {
 
       rowDiv.appendChild(cellDiv);
     });
-    boardElement.appendChild(rowDiv);
+    innerElement.appendChild(rowDiv);
+    boardElement.appendChild(innerElement);
   });
 }
 

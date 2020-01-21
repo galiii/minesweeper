@@ -1,12 +1,24 @@
  
- 
+  ![Image of Tag body](../img/style/body.png)
  ```html
  <body>
- <div class="layout-game">
 ```
- 
 
-  ![Image of Header](../img/header.png)
+![Image of layout-game](../img/style/layout-game.png)
+
+```html
+<div class="layout-game">
+```
+The CSS
+```css
+.layout-game {
+  display: flex;
+  flex-flow: column wrap;
+  width: 300px;
+}
+```
+
+  ![Image of Header](../img/style/header.png)
   ```html
     <div class="game-header">
       <div class="round">
@@ -21,8 +33,9 @@
         <div class="bull grey-bull"></div>
       </div>
     </div>
-    
-<style>
+  ```
+The CSS  
+```css
 /* The layout of the header */
 .game-header {
   display: flex;
@@ -72,43 +85,21 @@
   color: #b9baba;
   text-indent: 40px;
 }
-</style>
-  ```
+```
+ ![Image of Board](../img/style/board-game.png)
 
+```html
+    <div class="board-game">
+```
 
-    <div class="flex-bord">
-      <div class="information">
-        <div class="level main-color border-color">
-          <button class="btn level-btn active">Easy</button>
-          <button class="btn level-btn">Hard</button>
-          <button class="btn level-btn">Expert</button>
-        </div>
-        <!-- Level easy hard expert -->
-        <div class="border panel border-color">
-          <div class="score-timer placeholder digital-num">
-            <div class="points"></div>
-            <div class="digit ">888</div>
-          </div>
-          <!--Score-->
-          <div class="smile">
-            <button class="btn" id="smileBtn">Click me</button>
+Now his css 
+```css
+.board-game {
+  display: flex;
+  flex-flow: column wrap;
+  background-color: #4a4a4a;
+}
+```
 
-          </div>
-          <!--SMILE-->
-          <div class="score-timer placeholder digital-num">
-            <div class="timer"></div>
-            <div class="digit">888</div>
-          </div>
-        </div>
-        <!--Timer-->
-      </div>
-      <!---Panel Timer Smile Score-->
-      <div class="dashbourd-game" id="game"></div>
-    </div>
-    <!--Flex Board-->
-  </div>
-  <!--Layout-->
-
-  <script src="./index.js"></script>
-</body>
-  ```
+His first child
+![Image of Board](../img/style/info.png)
